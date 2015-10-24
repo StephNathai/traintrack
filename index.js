@@ -1,12 +1,20 @@
 var express = require('express');
 var geohash = require('geohash').GeoHash;
-var server = require('http').createServer(app);
+var morgan  = require('morgan');
+var app     = express();
 //var googleKey = process.env.GOOGLE_TRAINTRACK_API_KEY
 
-var app = express();
+var server = app.listen(3000)
+var io     = require('socket.io')(server);
 
-app.listen(3000)
+app.use(morgan('combined'));
+app.use( express.static( 'public') );
 
-app.get('/', function(req, res){
-  res.render('index.ejs')
-});
+io.on('connection', function(socket) {
+
+  console.log("A new user has connected");
+  socket.emit('connect');
+
+
+
+}) //io
