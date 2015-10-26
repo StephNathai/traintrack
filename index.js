@@ -1,10 +1,12 @@
 var express = require('express');
 ///var geohash = require('geohash').GeoHash;
-///var morgan  = require('morgan');
+var morgan  = require('morgan');
 var request = require('request');
 var ProtoBuf = require("protobufjs"); // to parse mta data / https://github.com/dcodeIO/ProtoBuf.js/wiki/Installation
 var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
-var app     = express();
+var react = require('react');
+var app = express();
+var stops = require('./public/stops.js')
 ///var googleKey = process.env.GOOGLE_TRAINTRACK_API_KEY
 
 var server = app.listen(3000)
@@ -28,10 +30,18 @@ io.on('connection', function(socket) {
     if (!error && response.statusCode == 200) {
       var feed = GtfsRealtimeBindings.FeedMessage.decode(body);
       // http://datamine.mta.info/sites/all/files/pdfs/GTFS-Realtime-NYC-Subway%20version%201%20dated%207%20Sep.pdf
+      tripData = feed.entity
       feed.entity.forEach(function(entity) {
-        if (entity.vehicle) {
-          //console.log(entity.trip_update);
-          var schedule = entity.vehicle
+        if (entity.trip_update) {
+          ///console.log(entity.trip_update);
+          schedule = entity.trip_update
+          for(i=0; i<schedule.stop_time_update.length; i++){
+            for(var key in stops){
+              if (stops[schedule.stop_time_update[i].stop_id]) {
+                schedule.stop_time_update[i].stop = stops[schedule.stop_time_update[i].stop_id]
+              }
+            }
+          }
           //this sends the data to the client
           socket.emit('parsed_data', schedule);
         }
@@ -39,6 +49,19 @@ io.on('connection', function(socket) {
     }
   });
 
+// data is in JSON format
+app.get('/data', function(req, res) {
+  res.json(tripData);
+})
+
+app.get('/dataJSON', function(req, res) {
+  res.json(schedule)
+})
+
+
+app.get('/stops', function(req, res) {
+  res.json(stops)
+})
 
 
 }) //io
