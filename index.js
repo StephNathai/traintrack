@@ -8,7 +8,8 @@ var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 var react = require('react');
 var app = express();
 var stops = require('./public/stops.js')
-var shapes1 = require('./public/shapes1.js')
+var shapes1 = require('./public/shapes2.js')
+
 ///var googleKey = process.env.GOOGLE_TRAINTRACK_API_KEY
 
 var server = app.listen(3000)

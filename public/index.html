@@ -20,7 +20,7 @@
     <script>
     //Client side code
     var socket = io(); //create an io connection
-var map
+    var map
       //grabs parsed MTA data and prints it
       socket.on('parsed_data', function(schedule){
         //console.log(schedule)
@@ -29,7 +29,23 @@ var map
       socket.on('shapes1', function(shapes1) {
         //console.log(shapes1)
         shapes1;
-      })
+        var train1Coordinates = [];
+
+        shapes1.forEach(function(e,k){
+          train1Coordinates.push(e)
+        });
+
+        var train1 = new google.maps.Polyline({
+          path: train1Coordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 1
+        });
+
+        train1.setMap(map);
+
+      }); //socket close
 
         // combined geo-location and layer-transit to compile Google map
         // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
@@ -43,23 +59,6 @@ var map
         //this adds transit layer
         // var transitLayer = new google.maps.TransitLayer();
         // transitLayer.setMap(map);
-
-        var train1Coordinates = [
-        {lat: 40.889248, lng: -73.898583},
-        {lat: 40.878856, lng: -73.904834},
-        {lat: 40.884667, lng: -73.90087},
-        {lat: 40.889248, lng: -73.898583}
-        ];
-
-        var train1 = new google.maps.Polyline({
-          path: train1Coordinates,
-          geodesic: true,
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 5
-        });
-
-        train1.setMap(map);
 
 
         // this grabs the users location if they allow it
