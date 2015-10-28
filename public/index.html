@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div id="floating-panel">
+      <button id="drop" onclick="drop()">Drop Markers</button>
+    </div>
     <div id="map"></div>
     <!-- <script src="/map.jsx" type="text/jsx"></script>
     <script src="http://fb.me/react-0.12.2.js"></script>
@@ -20,15 +23,66 @@
     <script>
     //Client side code
     var socket = io(); //create an io connection
-    var map
+    var map;
+    var route1;
+    var stopArray = [];
+    var markers = [];
+
       //grabs parsed MTA data and prints it
-      socket.on('parsed_data', function(schedule){
-        //console.log(schedule)
+      socket.on('parsed_data', function(lineOne, stops1){
+        console.log('lineOne', lineOne)
+        for(var i=0; i<lineOne.length; i++){
+          stops1.forEach(function(e,k){
+          if(lineOne[i] == e.id){
+            stopArray.push(e.data)
+          }
+        })
+       }
+       console.log('stopArray', stopArray)
+
+       function drop() {
+        clearMarkers();
+        for (var i = 0; i < stopArray.length; i++) {
+          addMarkerWithTimeout(stopArray[i], i * 200);
+        }
+       }
+
+       function addMarkerWithTimeout(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            map: map,
+            animation: google.maps.Animation.DROP
+          }));
+        }, timeout);
+       }
+
+       function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+        }
+
+
+
+        //
+        //   for(var k=0; k<stopArray.length; k++){
+        //   var oneTrainMarker = new google.maps.Marker({
+        //     position: stopArray,
+        //     map: map,
+        //     icon: {
+        //       path: google.maps.SymbolPath.CIRCLE,
+        //       scale: 8
+        //     }
+        //   });
+        // }
+
       }); //io
 
       socket.on('shapes1', function(shapes1) {
         //console.log(shapes1)
-        shapes1;
+        route1 = shapes1
         var train1Coordinates = [];
 
         shapes1.forEach(function(e,k){
@@ -37,7 +91,7 @@
 
         var train1 = new google.maps.Polyline({
           path: train1Coordinates,
-          geodesic: true,
+          geodesic: false,
           strokeColor: '#FF0000',
           strokeOpacity: 1.0,
           strokeWeight: 1
@@ -51,6 +105,7 @@
         // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
         // https://developers.google.com/maps/documentation/javascript/examples/layer-transit
         function initMap() {
+
           map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.7127, lng: -74.0059}, //this is set to NYC lat and long
             zoom: 15
@@ -59,7 +114,7 @@
         //this adds transit layer
         // var transitLayer = new google.maps.TransitLayer();
         // transitLayer.setMap(map);
-
+        //
 
         // this grabs the users location if they allow it
           var infoWindow = new google.maps.InfoWindow({map: map});
