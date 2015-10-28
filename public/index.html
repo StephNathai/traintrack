@@ -40,7 +40,7 @@
        }
        console.log('stopArray', stopArray)
 
-       function drop() {
+       drop = function() {
         clearMarkers();
         for (var i = 0; i < stopArray.length; i++) {
           addMarkerWithTimeout(stopArray[i], i * 200);

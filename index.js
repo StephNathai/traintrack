@@ -49,15 +49,15 @@ io.on('connection', function(socket) {
       });
 
 
-//           for(var k=0; k<schedule.stop_time_update.length; k++){
-//             if(schedule.stop_time_update[k].arrival)
-//               schedule.stop_time_update[k].arrival['time'].low = moment.unix(schedule.stop_time_update[k].arrival['time'].low).format('YYYY-MM-DD HH:mm:ss');
-//           };
-//
-//           for(var k=0; k<schedule.stop_time_update.length; k++){
-//             if(schedule.stop_time_update[k].departure)
-//               schedule.stop_time_update[k].departure['time'].low = moment.unix(schedule.stop_time_update[k].departure['time'].low).format('YYYY-MM-DD HH:mm:ss');
-//           };
+          // for(var k=0; k<schedule.stop_time_update.length; k++){
+          //   if(schedule.stop_time_update[k].arrival)
+          //     schedule.stop_time_update[k].arrival['time'].low = moment.unix(schedule.stop_time_update[k].arrival['time'].low).format('YYYY-MM-DD HH:mm:ss');
+          // };
+          //
+          // for(var k=0; k<schedule.stop_time_update.length; k++){
+          //   if(schedule.stop_time_update[k].departure)
+          //     schedule.stop_time_update[k].departure['time'].low = moment.unix(schedule.stop_time_update[k].departure['time'].low).format('YYYY-MM-DD HH:mm:ss');
+          // };
 // // need to fix this
 //           for(var k=0; k<schedule.length; k++){
 //             //throw schedule.stop_time_update[k].arrival['time'].low
