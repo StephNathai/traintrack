@@ -8,18 +8,29 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div id="floating-panel1">
+      <button id="clear" onclick="clearMarkers()">Map</button>
+    </div>
+    <div id="one-all">
+      <button id="oneAll" onclick="oneAll()">One</button>
+    </div>
     <div id="one-north">
       <button id="oneNorth" onclick="oneNorth()">OneNorth</button>
     </div>
     <div id="one-south">
       <button id="oneSouth" onclick="oneSouth()">OneSouth</button>
     </div>
-    <div id="one-all">
-      <button id="oneAll" onclick="oneAll()">One</button>
+    <div id="two-all">
+      <button id="twoAll" onclick="twoAll()">Two</button>
     </div>
-    <div id="floating-panel1">
-      <button id="clear" onclick="clearMarkers()">Map</button>
+    <div id="two-north">
+      <button id="twoNorth" onclick="twoNorth()">TwoNorth</button>
     </div>
+    <div id="two-south">
+      <button id="twoSouth" onclick="twoSouth()">TwoSouth</button>
+    </div>
+
+
     <div id="map"></div>
     <!-- <script src="/map.jsx" type="text/jsx"></script>
     <script src="http://fb.me/react-0.12.2.js"></script>
@@ -34,13 +45,17 @@
     var socket = io(); //create an io connection
     var map;
     var route1;
+    var route2;
     var oneArray = [];
     var oneNorthArray = [];
     var oneSouthArray = [];
+    var twoArray = [];
+    var twoNorthArray = [];
+    var twoSouthArray = [];
     var markers = [];
 
       //grabs parsed MTA data and prints it
-      socket.on('parsed_data', function(lineOne, stops1){
+      socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2){
         console.log('lineOne', lineOne, lineOne.length)
         for(var i=0; i<lineOne.length; i++){
           stops1.forEach(function(e,k){
@@ -86,6 +101,52 @@
         }
        }
 
+       console.log('lineTwo', lineTwo, lineTwo.length)
+       for(var i=0; i<lineTwo.length; i++){
+         stops2.forEach(function(e,k){
+         if(lineTwo[i] == e.id && lineTwo[i][3] === "N"){
+           twoNorthArray.push(e.data)
+         } else if (lineTwo[i] == e.id && lineTwo[i][3] === "S") {
+           twoSouthArray.push(e.data)
+         }
+       })
+      }
+
+      for(var i=0; i<lineTwo.length; i++){
+        stops2.forEach(function(e,k){
+        if(lineTwo[i] == e.id){
+          twoArray.push(e.data)
+        }
+      })
+     }
+
+      console.log('twoArray', twoArray, twoArray.length)
+      console.log('twoNorthArray', twoNorthArray, twoNorthArray.length)
+      console.log('twoSouthArray', twoSouthArray, twoSouthArray.length)
+
+
+      twoAll = function() {
+       clearMarkers();
+       for (var i = 0; i < twoArray.length; i++) {
+         addMarkerWithTimeout(twoArray[i], i * 200);
+       }
+      }
+
+      twoNorth = function() {
+       clearMarkers();
+       for (var i = 0; i < twoNorthArray.length; i++) {
+         addMarkerWithTimeout(twoNorthArray[i], i * 200);
+       }
+      }
+
+      twoSouth = function() {
+       clearMarkers();
+       for (var i = 0; i < twoSouthArray.length; i++) {
+         addMarkerWithTimeout(twoSouthArray[i], i * 200);
+       }
+      }
+
+
        function addMarkerWithTimeout(position, timeout) {
         window.setTimeout(function() {
           markers.push(new google.maps.Marker({
@@ -103,19 +164,6 @@
         markers = [];
         }
 
-
-
-        //
-        //   for(var k=0; k<stopArray.length; k++){
-        //   var oneTrainMarker = new google.maps.Marker({
-        //     position: stopArray,
-        //     map: map,
-        //     icon: {
-        //       path: google.maps.SymbolPath.CIRCLE,
-        //       scale: 8
-        //     }
-        //   });
-        // }
 
       }); //io
 
@@ -138,7 +186,28 @@
 
         train1.setMap(map);
 
-      }); //socket close
+      }); //socket shapes 1 close
+
+      socket.on('shapes2', function(shapes2) {
+        //console.log(shapes1)
+        route2 = shapes2
+        var train2Coordinates = [];
+
+        shapes2.forEach(function(e,k){
+          train2Coordinates.push(e)
+        });
+
+        var train2 = new google.maps.Polyline({
+          path: train2Coordinates,
+          geodesic: true,
+          strokeColor: '#0000FF',
+          strokeOpacity: 1.0,
+          strokeWeight: 1
+        });
+
+        train2.setMap(map);
+
+      }); //socket shapes 2close
 
         // combined geo-location and layer-transit to compile Google map
         // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation

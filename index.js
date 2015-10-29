@@ -10,7 +10,8 @@ var app = express();
 var stops = require('./public/stops.js')
 var shapes1 = require('./public/shapes1.js')
 var stops1 = require('./public/stops1.js')
-
+var shapes2 = require('./public/shapes2.js')
+var stops2 = require('./public/stops2.js')
 // stops1.forEach(function(e,k){
 //   console.log(e.id)
 // });
@@ -48,6 +49,14 @@ io.on('connection', function(socket) {
         return schedule.stop_time_update[0].stop_id
       });
 
+      var lineTwo = feed.entity.filter(function(entity) {
+        schedule = entity.trip_update
+        return schedule && schedule.trip.route_id == 2 && schedule.stop_time_update[0].stop_id
+      }).map(function(entity) {
+        schedule = entity.trip_update
+        return schedule.stop_time_update[0].stop_id
+      });
+
 
           // for(var k=0; k<schedule.stop_time_update.length; k++){
           //   if(schedule.stop_time_update[k].arrival)
@@ -76,9 +85,10 @@ io.on('connection', function(socket) {
 
 
       //this sends the data to the client
-      socket.emit('parsed_data', lineOne, stops1);
+      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2);
       socket.emit('shapes1', shapes1)
-
+      
+      socket.emit('shapes2', shapes2)
       //console.log(lineOne)
     }
   });

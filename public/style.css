@@ -7,6 +7,21 @@ html, body {
   height: 100%;
 }
 
+#floating-panel1 {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  margin-left: -250px;
+}
+
 #one-all {
   position: absolute;
   top: 10px;
@@ -52,9 +67,7 @@ html, body {
   margin-left: -20px;
 }
 
-
-
-#floating-panel1 {
+#two-all {
   position: absolute;
   top: 10px;
   left: 25%;
@@ -66,5 +79,35 @@ html, body {
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
-  margin-left: -250px;
+  margin-left: 60px;
+}
+
+#two-north {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  margin-left: 110px;
+}
+
+#two-south {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  margin-left: 190px;
 }
