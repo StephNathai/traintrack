@@ -28,19 +28,18 @@ app.use( express.static( 'public') );
 io.on('connection', function(socket) {
 
   console.log("A new user has connected");
-
-// this grabs the data and parses it
-// https://developers.google.com/transit/gtfs-realtime/code-samples#javascript_nodejs
   var requestSettings = {
     method: 'GET',
     url: 'http://datamine.mta.info/files/k38dkwh992dk/gtfs',
     encoding: null
   };
+
   request(requestSettings, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var feed = GtfsRealtimeBindings.FeedMessage.decode(body);
       // http://datamine.mta.info/sites/all/files/pdfs/GTFS-Realtime-NYC-Subway%20version%201%20dated%207%20Sep.pdf
       tripData = feed.entity
+
       var lineOne = feed.entity.filter(function(entity) {
         schedule = entity.trip_update
         return schedule && schedule.trip.route_id == 1 && schedule.stop_time_update[0].stop_id
@@ -58,55 +57,64 @@ io.on('connection', function(socket) {
       });
 
 
-          // for(var k=0; k<schedule.stop_time_update.length; k++){
-          //   if(schedule.stop_time_update[k].arrival)
-          //     schedule.stop_time_update[k].arrival['time'].low = moment.unix(schedule.stop_time_update[k].arrival['time'].low).format('YYYY-MM-DD HH:mm:ss');
-          // };
-          //
-          // for(var k=0; k<schedule.stop_time_update.length; k++){
-          //   if(schedule.stop_time_update[k].departure)
-          //     schedule.stop_time_update[k].departure['time'].low = moment.unix(schedule.stop_time_update[k].departure['time'].low).format('YYYY-MM-DD HH:mm:ss');
-          // };
-// // need to fix this
-//           for(var k=0; k<schedule.length; k++){
-//             //throw schedule.stop_time_update[k].arrival['time'].low
-//             if([k].vehicle.timestamp.low)
-//               [k].vehicle.timestamp.low = moment.unix([k].vehicle.timestamp.low).format('YYYY-MM-DD HH:mm:ss');
-//           };
-//
-//
-//           for(var i=0; i<schedule.stop_time_update.length; i++){
-//             for(var key in stops){
-//               if (stops[schedule.stop_time_update[i].stop_id]) {
-//                 schedule.stop_time_update[i].stop = stops[schedule.stop_time_update[i].stop_id]
-//               }
-//             }
-//           }
 
 
       //this sends the data to the client
       socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2);
       socket.emit('shapes1', shapes1)
-      
+
+      socket.emit('shapes2', shapes2)
+      //console.log(lineOne)
+    }
+  });
+// this grabs the data and parses it
+// https://developers.google.com/transit/gtfs-realtime/code-samples#javascript_nodejs
+  var requestSettings = {
+    method: 'GET',
+    url: 'http://datamine.mta.info/files/k38dkwh992dk/gtfs',
+    encoding: null
+  };
+setInterval(function(){
+
+  request(requestSettings, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var feed = GtfsRealtimeBindings.FeedMessage.decode(body);
+      // http://datamine.mta.info/sites/all/files/pdfs/GTFS-Realtime-NYC-Subway%20version%201%20dated%207%20Sep.pdf
+      tripData = feed.entity
+
+      var lineOne = feed.entity.filter(function(entity) {
+        schedule = entity.trip_update
+        return schedule && schedule.trip.route_id == 1 && schedule.stop_time_update[0].stop_id
+      }).map(function(entity) {
+        schedule = entity.trip_update
+        return schedule.stop_time_update[0].stop_id
+      });
+
+      var lineTwo = feed.entity.filter(function(entity) {
+        schedule = entity.trip_update
+        return schedule && schedule.trip.route_id == 2 && schedule.stop_time_update[0].stop_id
+      }).map(function(entity) {
+        schedule = entity.trip_update
+        return schedule.stop_time_update[0].stop_id
+      });
+
+
+
+
+      //this sends the data to the client
+      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2);
+      socket.emit('shapes1', shapes1)
+
       socket.emit('shapes2', shapes2)
       //console.log(lineOne)
     }
   });
 
+},30000)
 
   // data is in JSON format
   app.get('/data', function(req, res) {
     res.json(tripData);
   })
-
-
-  app.get('/stops', function(req, res) {
-    res.json(stops)
-  })
-
-  app.get('/schedule', function(req, res) {
-    res.json(schedule)
-  })
-
 
 }) //io
