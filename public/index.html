@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="floating-panel1">
-      <button id="clear" onclick="clearMarkers()">Map</button>
+      <button id="clear" onclick="clearPolylines()">Map</button>
     </div>
     <div id="one-all">
       <button id="oneAll" onclick="oneAll()">One</button>
@@ -85,27 +85,51 @@
 
        oneAll = function() {
         clearMarkers();
+        if (trainTwoPath) {
+          trainTwoPath.setMap(null)
+          drawOneLine()
+          for (var i = 0; i < oneArray.length; i++) {
+            addMarkerWithTimeout(oneArray[i], i * 200);
+          }
+        } else {
         drawOneLine()
         for (var i = 0; i < oneArray.length; i++) {
           addMarkerWithTimeout(oneArray[i], i * 200);
         }
        }
+     }
 
        oneNorth = function() {
         clearMarkers();
+        if (trainTwoPath) {
+          trainTwoPath.setMap(null)
+          drawOneLine()
+          for (var i = 0; i < oneNorthArray.length; i++) {
+            addMarkerWithTimeout(oneNorthArray[i], i * 200);
+          }
+        } else {
         drawOneLine()
         for (var i = 0; i < oneNorthArray.length; i++) {
           addMarkerWithTimeout(oneNorthArray[i], i * 200);
         }
        }
+     }
 
        oneSouth = function() {
         clearMarkers();
+        if (trainTwoPath) {
+          trainTwoPath.setMap(null)
+          drawOneLine()
+          for (var i = 0; i < oneSouthArray.length; i++) {
+            addMarkerWithTimeout(oneSouthArray[i], i * 200);
+          }
+        } else {
         drawOneLine()
         for (var i = 0; i < oneSouthArray.length; i++) {
           addMarkerWithTimeout(oneSouthArray[i], i * 200);
         }
        }
+     }
 
        console.log('lineTwo', lineTwo, lineTwo.length)
        for(var i=0; i<lineTwo.length; i++){
@@ -133,27 +157,51 @@
 
       twoAll = function() {
        clearMarkers();
+       if (trainOnePath) {
+         trainOnePath.setMap(null)
+         drawTwoLine();
+         for (var i = 0; i < twoArray.length; i++) {
+           addMarkerWithTimeout(twoArray[i], i * 200);
+         }
+       } else {
        drawTwoLine();
        for (var i = 0; i < twoArray.length; i++) {
          addMarkerWithTimeout(twoArray[i], i * 200);
        }
       }
+      }
 
       twoNorth = function() {
        clearMarkers();
+       if (trainOnePath) {
+         trainOnePath.setMap(null)
+         drawTwoLine();
+         for (var i = 0; i < twoNorthArray.length; i++) {
+           addMarkerWithTimeout(twoNorthArray[i], i * 200);
+         }
+       } else {
        drawTwoLine();
        for (var i = 0; i < twoNorthArray.length; i++) {
          addMarkerWithTimeout(twoNorthArray[i], i * 200);
        }
       }
+    }
 
       twoSouth = function() {
        clearMarkers();
+       if (trainOnePath) {
+         trainOnePath.setMap(null)
+         drawTwoLine();
+         for (var i = 0; i < twoSouthArray.length; i++) {
+           addMarkerWithTimeout(twoSouthArray[i], i * 200);
+         }
+       } else {
        drawTwoLine();
        for (var i = 0; i < twoSouthArray.length; i++) {
          addMarkerWithTimeout(twoSouthArray[i], i * 200);
        }
       }
+    }
 
 
        function addMarkerWithTimeout(position, timeout) {
@@ -167,12 +215,12 @@
        }
 
        clearMarkers = function() {
-        transitLayerMap();
+        //transitLayerMap();
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
         markers = [];
-        }
+      }
 
 
       }); //io
@@ -222,7 +270,22 @@
         }
 
 
+
       }); //socket shapes 2close
+
+      clearPolylines = function() {
+        if (trainOnePath) {
+          trainOnePath.setMap(null)
+          clearMarkers();
+        } else if (trainTwoPath) {
+          trainTwoPath.setMap(null)
+          clearMarkers();
+        } else if (trainTwoPath && trainOnePath){
+          clearMarkers();
+        } else {
+          clearMarkers();
+        }
+      }
         // combined geo-location and layer-transit to compile Google map
         // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
         // https://developers.google.com/maps/documentation/javascript/examples/layer-transit
@@ -234,10 +297,10 @@
           });
 
         //this adds transit layer
-        transitLayerMap = function() {
-          transitLayer = new google.maps.TransitLayer();
-          transitLayer.setMap(map);
-        }
+        // transitLayerMap = function() {
+        //   transitLayer = new google.maps.TransitLayer();
+        //   transitLayer.setMap(map);
+        // }
 
         // this grabs the users location if they allow it
           var infoWindow = new google.maps.InfoWindow({map: map});
