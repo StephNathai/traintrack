@@ -8,8 +8,17 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div id="floating-panel">
-      <button id="drop" onclick="drop()">Drop Markers</button>
+    <div id="one-north">
+      <button id="oneNorth" onclick="oneNorth()">OneNorth</button>
+    </div>
+    <div id="one-south">
+      <button id="oneSouth" onclick="oneSouth()">OneSouth</button>
+    </div>
+    <div id="one-all">
+      <button id="oneAll" onclick="oneAll()">One</button>
+    </div>
+    <div id="floating-panel1">
+      <button id="clear" onclick="clearMarkers()">Map</button>
     </div>
     <div id="map"></div>
     <!-- <script src="/map.jsx" type="text/jsx"></script>
@@ -25,25 +34,55 @@
     var socket = io(); //create an io connection
     var map;
     var route1;
-    var stopArray = [];
+    var oneArray = [];
+    var oneNorthArray = [];
+    var oneSouthArray = [];
     var markers = [];
 
       //grabs parsed MTA data and prints it
       socket.on('parsed_data', function(lineOne, stops1){
-        console.log('lineOne', lineOne)
+        console.log('lineOne', lineOne, lineOne.length)
         for(var i=0; i<lineOne.length; i++){
           stops1.forEach(function(e,k){
-          if(lineOne[i] == e.id){
-            stopArray.push(e.data)
+          if(lineOne[i] == e.id && lineOne[i][3] === "N"){
+            oneNorthArray.push(e.data)
+          } else if (lineOne[i] == e.id && lineOne[i][3] === "S") {
+            oneSouthArray.push(e.data)
           }
         })
        }
-       console.log('stopArray', stopArray)
 
-       drop = function() {
+       for(var i=0; i<lineOne.length; i++){
+         stops1.forEach(function(e,k){
+         if(lineOne[i] == e.id){
+           oneArray.push(e.data)
+         }
+       })
+      }
+
+       console.log('oneArray', oneArray, oneArray.length)
+       console.log('oneNorthArray', oneNorthArray, oneNorthArray.length)
+       console.log('oneSouthArray', oneSouthArray, oneSouthArray.length)
+
+
+       oneAll = function() {
         clearMarkers();
-        for (var i = 0; i < stopArray.length; i++) {
-          addMarkerWithTimeout(stopArray[i], i * 200);
+        for (var i = 0; i < oneArray.length; i++) {
+          addMarkerWithTimeout(oneArray[i], i * 200);
+        }
+       }
+
+       oneNorth = function() {
+        clearMarkers();
+        for (var i = 0; i < oneNorthArray.length; i++) {
+          addMarkerWithTimeout(oneNorthArray[i], i * 200);
+        }
+       }
+
+       oneSouth = function() {
+        clearMarkers();
+        for (var i = 0; i < oneSouthArray.length; i++) {
+          addMarkerWithTimeout(oneSouthArray[i], i * 200);
         }
        }
 
@@ -57,7 +96,7 @@
         }, timeout);
        }
 
-       function clearMarkers() {
+       clearMarkers = function() {
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
@@ -91,7 +130,7 @@
 
         var train1 = new google.maps.Polyline({
           path: train1Coordinates,
-          geodesic: false,
+          geodesic: true,
           strokeColor: '#FF0000',
           strokeOpacity: 1.0,
           strokeWeight: 1
