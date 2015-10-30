@@ -12,6 +12,8 @@ var shapes1 = require('./public/shapes1.js')
 var stops1 = require('./public/stops1.js')
 var shapes2 = require('./public/shapes2.js')
 var stops2 = require('./public/stops2.js')
+var shapes3 = require('./public/shapes3.js')
+var stops3 = require('./public/stops3.js')
 // stops1.forEach(function(e,k){
 //   console.log(e.id)
 // });
@@ -59,11 +61,19 @@ var data = function() {
         return schedule.stop_time_update[0].stop_id
       });
 
-      //this sends the data to the client
-      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2);
-      socket.emit('shapes1', shapes1)
+      var lineThree = feed.entity.filter(function(entity) {
+        schedule = entity.trip_update
+        return schedule && schedule.trip.route_id == 3 && schedule.stop_time_update[0].stop_id
+      }).map(function(entity) {
+        schedule = entity.trip_update
+        return schedule.stop_time_update[0].stop_id
+      });
 
+      //this sends the data to the client
+      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2, lineThree, stops3);
+      socket.emit('shapes1', shapes1)
       socket.emit('shapes2', shapes2)
+      socket.emit('shapes3', shapes3)
       //console.log(lineOne)
     }
   });

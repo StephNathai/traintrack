@@ -1,29 +1,50 @@
 //Client side code
 $(function() {
 
-
 var socket = io(); //create an io connection
 var map;
+var markers = [];
+var transitLayer;
+var clearMap;
+
 var route1;
 var route2;
+var route3;
+
 var oneArray
 var oneNorthArray
 var oneSouthArray
+
 var twoArray
 var twoNorthArray
 var twoSouthArray
-var markers = [];
-var transitLayer;
-var trainOnePath
-var trainTwoPath;
-var clearMap;
 
+var threeArray
+var threeNorthArray
+var threeSouthArray
+
+var trainOnePath;
+var trainTwoPath;
+var trainThreePath;
+
+var oneAll;
+var oneNorth;
+var oneSouth;
+
+var twoAll;
+var twoNorth;
+var twoSouth;
+
+var threeAll;
+var threeNorth;
+var threeSouth;
 
 
 $('img.menu').on('click', function() {
   $('select').toggle();
 })
 
+//////// START: LINE 1 SELECTORS //////////
 $('select.one').change(function() {
   var lineSelected = $('option:selected.one').text();
     console.log('one selected:', lineSelected)
@@ -36,6 +57,7 @@ $('select.one').change(function() {
     }
 });
 
+//////// START: LINE 2 SELECTORS //////////
 $('select.two').change(function() {
   var lineSelected = $('option:selected.two').text();
     console.log('two selected:', lineSelected)
@@ -48,23 +70,36 @@ $('select.two').change(function() {
     }
 });
 
+//////// START: LINE 3 SELECTORS //////////
+$('select.three').change(function() {
+  var lineSelected = $('option:selected.three').text();
+    console.log('three selected:', lineSelected)
+    if(lineSelected === 'Three All') {
+      threeAll();
+    } else if (lineSelected === 'Three North') {
+      threeNorth();
+    } else if (lineSelected === 'Three South') {
+      threeSouth();
+    }
+});
 
-
-
-
-
+//////// START: LINE 4 SELECTORS //////////
 
   //grabs parsed MTA data and prints it
-  socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2){
-    console.log('lineOne', lineOne, lineOne.length)
+  socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2, lineThree, stops3){
     oneArray = [];
     oneNorthArray = [];
     oneSouthArray = [];
     twoArray = [];
     twoNorthArray = [];
     twoSouthArray = [];
+    threeArray = [];
+    threeNorthArray = [];
+    threeSouthArray = [];
 
+///// START: LINE 1 FXNS ///////
 
+    console.log('lineOne', lineOne, lineOne.length)
 // remove duplicates fom lineOne
     var lineOneFiltered = lineOne.reduce(function(a,b){
       if(a.indexOf(b) < 0) a.push(b);
@@ -142,6 +177,8 @@ $('select.two').change(function() {
       }
      }
    }
+
+///// START: LINE 2 FXNS ///////
 
    console.log('lineTwo', lineTwo, lineTwo.length)
 // remove duplicates fom lineTwo
@@ -222,6 +259,91 @@ $('select.two').change(function() {
   }
 }
 
+///// START: LINE 3 FXNS ///////
+
+  console.log('lineThree', lineThree, lineThree.length)
+  // remove duplicates fom lineThree
+  var lineThreeFiltered = lineThree.reduce(function(a,b){
+    if(a.indexOf(b) < 0) a.push(b);
+      return a;
+    },[]);
+  console.log('lineThreeFiltered',lineThreeFiltered, lineThreeFiltered.length)
+
+  for(var i=0; i<lineThreeFiltered.length; i++){
+    stops3.forEach(function(e,k){
+    if(lineThreeFiltered[i] == e.id && lineThreeFiltered[i][3] === "N"){
+      threeNorthArray.push(e.data)
+    } else if (lineThreeFiltered[i] == e.id && lineThreeFiltered[i][3] === "S") {
+      threeSouthArray.push(e.data)
+    }
+  })
+  }
+
+  for(var i=0; i<lineThreeFiltered.length; i++){
+   stops3.forEach(function(e,k){
+   if(lineThreeFiltered[i] == e.id){
+     threeArray.push(e.data)
+   }
+  })
+  }
+
+  console.log('threeArray', threeArray, threeArray.length)
+  console.log('threeNorthArray', threeNorthArray, threeNorthArray.length)
+  console.log('threeSouthArray', threeSouthArray, threeSouthArray.length)
+
+
+  threeAll = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawThreeLine()
+      for (var i = 0; i < threeArray.length; i++) {
+        addMarkerWithTimeout(threeArray[i], i * 200);
+      }
+    } else {
+    drawThreeLine()
+    for (var i = 0; i < threeArray.length; i++) {
+      addMarkerWithTimeout(threeArray[i], i * 200);
+    }
+  }
+  }
+
+  threeNorth = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawThreeLine()
+      for (var i = 0; i < threeNorthArray.length; i++) {
+        addMarkerWithTimeout(threeNorthArray[i], i * 200);
+      }
+    } else {
+    drawThreeLine()
+    for (var i = 0; i < threeNorthArray.length; i++) {
+      addMarkerWithTimeout(threeNorthArray[i], i * 200);
+    }
+  }
+  }
+
+  threeSouth = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawThreeLine()
+      for (var i = 0; i < threeSouthArray.length; i++) {
+        addMarkerWithTimeout(threeSouthArray[i], i * 200);
+      }
+    } else {
+    drawThreeLine()
+    for (var i = 0; i < threeSouthArray.length; i++) {
+      addMarkerWithTimeout(threeSouthArray[i], i * 200);
+    }
+   }
+  }
+
+///// START: LINE 4 FXNS ///////
+
+
+////START: ADDITIONAL FXNS ////////
 
    function addMarkerWithTimeout(position, timeout) {
     window.setTimeout(function() {
@@ -243,6 +365,7 @@ $('select.two').change(function() {
 
   }); //io
 
+  ////START: SHAPES1 ////////
   socket.on('shapes1', function(shapes1) {
     //console.log(shapes1)
     drawOneLine = function() {
@@ -266,6 +389,7 @@ $('select.two').change(function() {
 
   }); //socket shapes 1 close
 
+////START: SHAPES2 ////////
   socket.on('shapes2', function(shapes2) {
     //console.log(shapes1)
     drawTwoLine = function() {
@@ -288,6 +412,32 @@ $('select.two').change(function() {
     }
 
   }); //socket shapes 2close
+
+////START: SHAPES3 ////////
+socket.on('shapes3', function(shapes3) {
+  //console.log(shapes1)
+  drawThreeLine = function() {
+  route3 = shapes3
+  var train3Coordinates = [];
+
+  shapes3.forEach(function(e,k){
+    train3Coordinates.push(e)
+  });
+
+  trainThreePath = new google.maps.Polyline({
+    path: train3Coordinates,
+    geodesic: true,
+    strokeColor: '#0000FF',
+    strokeOpacity: 1.0,
+    strokeWeight: 5
+  });
+
+  trainThreePath.setMap(map);
+  }
+
+}); //socket shapes 3close
+
+  ////START: SHAPES4 ////////
 
     // combined geo-location and layer-transit to compile Google map
     // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
