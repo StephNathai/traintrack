@@ -124,6 +124,30 @@ html, body {
    left: 400px;
    top: 2%;
  }
+ div.four{
+   position: absolute;
+   z-index: 1;
+   left: 500px;
+   top: 2%;
+ }
+ div.five{
+   position: absolute;
+   z-index: 1;
+   left: 600px;
+   top: 2%;
+ }
+ div.six{
+   position: absolute;
+   z-index: 1;
+   left: 700px;
+   top: 2%;
+ }
+ div.shuttle{
+   position: absolute;
+   z-index: 1;
+   left: 800px;
+   top: 2%;
+ }
 
  button#clear-markers {
    position: absolute;

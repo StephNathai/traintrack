@@ -23,6 +23,22 @@ var threeArray
 var threeNorthArray
 var threeSouthArray
 
+var fourArray
+var fourNorthArray
+var fourSouthArray
+
+var fiveArray
+var fiveNorthArray
+var fiveSouthArray
+
+var sixArray
+var sixNorthArray
+var sixSouthArray
+
+var shuttleArray
+var shuttleNorthArray
+var shuttleSouthArray
+
 var trainOnePath;
 var trainTwoPath;
 var trainThreePath;
