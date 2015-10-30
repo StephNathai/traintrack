@@ -7,6 +7,8 @@ html, body {
   height: 100%;
 }
 
+
+
 #floating-panel1 {
   position: absolute;
   top: 10px;
@@ -101,4 +103,25 @@ html, body {
  div img.menu {
   position: absolute;
   z-index: 1;
+ }
+
+ div.one{
+   position: absolute;
+   z-index: 1;
+   left: 200px;
+   top: 2%;
+ }
+
+ div.two{
+   position: absolute;
+   z-index: 1;
+   left: 300px;
+   top: 2%;
+ }
+
+ button#clear-markers {
+   position: absolute;
+   z-index: 1;
+   left: 130px;
+   top: 2%;
  }

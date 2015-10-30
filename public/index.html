@@ -11,26 +11,28 @@
   <body>
     <script src="/socket.io/socket.io.js"></script>
     <div id="floating-panel1">
-      <button id="clear" onclick="toggleLayer()">Map</button>
+      <button id="clear" onclick="toggleLayer()">Transit</button>
     </div>
-    <div id="one-all">
-      <button id="oneAll" onclick="oneAll()">One</button>
+    <div>
+      <button id="clear-markers" onclick="clearMap()">Clear Map</button>
     </div>
-    <div id="one-north">
-      <button id="oneNorth" onclick="oneNorth()">OneNorth</button>
+    <div class="one">
+      <select class="one">
+        <option class="one" value="" disabled selected>One</option>
+        <option class="one" value="oneAll">One All</option>
+        <option class="one" value="oneNorth">One North</option>
+        <option class="one" value="oneSouth">One South</option>
+      </select>
     </div>
-    <div id="one-south">
-      <button id="oneSouth" onclick="oneSouth()">OneSouth</button>
+    <div class="two">
+      <select class="two">
+        <option class="two" value="" disabled selected>Two</option>
+        <option class="two" value="twoAll">Two All</option>
+        <option class="two" value="twoNorth">Two North</option>
+        <option class="two" value="twoSouth">Two South</option>
+      </select>
     </div>
-    <div id="two-all">
-      <button id="twoAll" onclick="twoAll()">Two</button>
-    </div>
-    <div id="two-north">
-      <button id="twoNorth" onclick="twoNorth()">TwoNorth</button>
-    </div>
-    <div id="two-south">
-      <button id="twoSouth" onclick="twoSouth()">TwoSouth</button>
-    </div>
+
     <div>
       <!-- https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon#size=48 -->
       <img class="menu" src="/images/menu.png" alt="menu">

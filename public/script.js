@@ -16,12 +16,43 @@ var markers = [];
 var transitLayer;
 var trainOnePath
 var trainTwoPath;
+var clearMap;
 
 
 
 $('img.menu').on('click', function() {
-  $('button').toggle();
+  $('select').toggle();
 })
+
+$('select.one').change(function() {
+  var lineSelected = $('option:selected.one').text();
+    console.log('one selected:', lineSelected)
+    if(lineSelected === 'One All') {
+      oneAll();
+    } else if (lineSelected === 'One North') {
+      oneNorth();
+    } else if (lineSelected === 'One South') {
+      oneSouth();
+    }
+});
+
+$('select.two').change(function() {
+  var lineSelected = $('option:selected.two').text();
+    console.log('two selected:', lineSelected)
+    if(lineSelected === 'Two All') {
+      twoAll();
+    } else if (lineSelected === 'Two North') {
+      twoNorth();
+    } else if (lineSelected === 'Two South') {
+      twoSouth();
+    }
+});
+
+
+
+
+
+
 
   //grabs parsed MTA data and prints it
   socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2){
@@ -313,8 +344,23 @@ $('img.menu').on('click', function() {
         transitLayer.setMap(null);
       } else {
         transitLayer.setMap(map);
-        clearMarkers();
       }
+    }
+
+//need to fix this function
+    clearMap = function() {
+      clearMarkers();
+      if( transitLayer.getMap() ){
+        transitLayer.setMap(null);
+      }
+
+      else if (trainTwoPath) {
+        trainTwoPath.setMap(null)
+      }
+
+      else if (trainOnePath) {
+        trainOnePath.setMap(null)
+    }
     }
 
 
