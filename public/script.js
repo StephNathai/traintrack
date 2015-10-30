@@ -10,6 +10,10 @@ var clearMap;
 var route1;
 var route2;
 var route3;
+var route4;
+var route5;
+var route6;
+var routeShuttle;
 
 var oneArray
 var oneNorthArray
@@ -42,6 +46,10 @@ var shuttleSouthArray
 var trainOnePath;
 var trainTwoPath;
 var trainThreePath;
+var trainFourPath;
+var trainFivePath;
+var trainSixPath;
+var trainShuttlePath;
 
 var oneAll;
 var oneNorth;
@@ -54,6 +62,22 @@ var twoSouth;
 var threeAll;
 var threeNorth;
 var threeSouth;
+
+var fourAll;
+var fourNorth;
+var fourSouth;
+
+var fiveAll;
+var fiveNorth;
+var fiveSouth;
+
+var sixAll;
+var sixNorth;
+var sixSouth;
+
+var shuttleAll;
+var shuttleNorth;
+var shuttleSouth;
 
 
 $('img.menu').on('click', function() {
@@ -100,18 +124,86 @@ $('select.three').change(function() {
 });
 
 //////// START: LINE 4 SELECTORS //////////
+$('select.four').change(function() {
+  var lineSelected = $('option:selected.four').text();
+    console.log('four selected:', lineSelected)
+    if(lineSelected === 'Four All') {
+      fourAll();
+    } else if (lineSelected === 'Four North') {
+      fourNorth();
+    } else if (lineSelected === 'Four South') {
+      fourSouth();
+    }
+});
+
+//////// START: LINE 5 SELECTORS //////////
+$('select.five').change(function() {
+  var lineSelected = $('option:selected.five').text();
+    console.log('five selected:', lineSelected)
+    if(lineSelected === 'Five All') {
+      fiveAll();
+    } else if (lineSelected === 'Five North') {
+      fiveNorth();
+    } else if (lineSelected === 'Five South') {
+      fiveSouth();
+    }
+});
+
+//////// START: LINE 6 SELECTORS //////////
+$('select.six').change(function() {
+  var lineSelected = $('option:selected.six').text();
+    console.log('six selected:', lineSelected)
+    if(lineSelected === 'Six All') {
+      sixAll();
+    } else if (lineSelected === 'Six North') {
+      sixNorth();
+    } else if (lineSelected === 'Six South') {
+      sixSouth();
+    }
+});
+
+//////// START: LINE Shuttle SELECTORS //////////
+$('select.shuttle').change(function() {
+  var lineSelected = $('option:selected.shuttle').text();
+    console.log('shuttle selected:', lineSelected)
+    if(lineSelected === 'Shuttle All') {
+      shuttleAll();
+    } else if (lineSelected === 'Shuttle North') {
+      shuttleNorth();
+    } else if (lineSelected === 'Shuttle South') {
+      shuttleSouth();
+    }
+});
 
   //grabs parsed MTA data and prints it
-  socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2, lineThree, stops3){
+  socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2, lineThree, stops3, lineFour, stops4, lineFive, stops5, lineSix, stops6, lineShuttle, stopsShuttle){
     oneArray = [];
     oneNorthArray = [];
     oneSouthArray = [];
+
     twoArray = [];
     twoNorthArray = [];
     twoSouthArray = [];
+
     threeArray = [];
     threeNorthArray = [];
     threeSouthArray = [];
+
+    fourArray = [];
+    fourNorthArray = [];
+    fourSouthArray = [];
+
+    fiveArray = [];
+    fiveNorthArray = [];
+    fiveSouthArray = [];
+
+    sixArray = [];
+    sixNorthArray = [];
+    sixSouthArray = [];
+
+    shuttleArray = [];
+    shuttleNorthArray = [];
+    shuttleSouthArray = [];
 
 ///// START: LINE 1 FXNS ///////
 
@@ -358,6 +450,331 @@ $('select.three').change(function() {
 
 ///// START: LINE 4 FXNS ///////
 
+  console.log('lineFour', lineFour, lineFour.length)
+  // remove duplicates fom lineThree
+  var lineFourFiltered = lineFour.reduce(function(a,b){
+    if(a.indexOf(b) < 0) a.push(b);
+      return a;
+    },[]);
+  console.log('lineFourFiltered',lineFourFiltered, lineFourFiltered.length)
+
+  for(var i=0; i<lineFourFiltered.length; i++){
+    stops4.forEach(function(e,k){
+    if(lineFourFiltered[i] == e.id && lineFourFiltered[i][3] === "N"){
+      fourNorthArray.push(e.data)
+    } else if (lineFourFiltered[i] == e.id && lineFourFiltered[i][3] === "S") {
+      fourSouthArray.push(e.data)
+    }
+  })
+  }
+
+  for(var i=0; i<lineFourFiltered.length; i++){
+   stops4.forEach(function(e,k){
+   if(lineFourFiltered[i] == e.id){
+     fourArray.push(e.data)
+   }
+  })
+  }
+
+  console.log('fourArray', fourArray, fourArray.length)
+  console.log('fourNorthArray', fourNorthArray, fourNorthArray.length)
+  console.log('fourSouthArray', fourSouthArray, fourSouthArray.length)
+
+
+  fourAll = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawFourLine()
+      for (var i = 0; i < fourArray.length; i++) {
+        addMarkerWithTimeout(fourArray[i], i * 200);
+      }
+    } else {
+    drawFourLine()
+    for (var i = 0; i < fourArray.length; i++) {
+      addMarkerWithTimeout(fourArray[i], i * 200);
+    }
+  }
+  }
+
+  fourNorth = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawFourLine()
+      for (var i = 0; i < fourNorthArray.length; i++) {
+        addMarkerWithTimeout(fourNorthArray[i], i * 200);
+      }
+    } else {
+    drawFourLine()
+    for (var i = 0; i < fourNorthArray.length; i++) {
+      addMarkerWithTimeout(fourNorthArray[i], i * 200);
+    }
+  }
+  }
+
+  fourSouth = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawFourLine()
+      for (var i = 0; i < fourSouthArray.length; i++) {
+        addMarkerWithTimeout(fourSouthArray[i], i * 200);
+      }
+    } else {
+    drawFourLine()
+    for (var i = 0; i < fourSouthArray.length; i++) {
+      addMarkerWithTimeout(fourSouthArray[i], i * 200);
+    }
+   }
+  }
+
+
+///// START: LINE 5 FXNS ///////
+
+//   console.log('lineFive', lineFive, lineFive.length)
+//   // remove duplicates fom lineThree
+//   var lineFiveFiltered = lineFive.reduce(function(a,b){
+//     if(a.indexOf(b) < 0) a.push(b);
+//       return a;
+//     },[]);
+//   console.log('lineFiveFiltered',lineFiveFiltered, lineFiveFiltered.length)
+//
+//   for(var i=0; i<lineFiveFiltered.length; i++){
+//     stops5.forEach(function(e,k){
+//     if(lineFiveFiltered[i] == e.id && lineFiveFiltered[i][3] === "N"){
+//       fiveNorthArray.push(e.data)
+//     } else if (lineFiveFiltered[i] == e.id && lineFiveFiltered[i][3] === "S") {
+//       fiveSouthArray.push(e.data)
+//     }
+//   })
+//   }
+//
+//   for(var i=0; i<lineFiveFiltered.length; i++){
+//    stops5.forEach(function(e,k){
+//    if(lineFiveFiltered[i] == e.id){
+//      fiveArray.push(e.data)
+//    }
+//   })
+//   }
+//
+//   console.log('fiveArray', fiveArray, fiveArray.length)
+//   console.log('fiveNorthArray', fiveNorthArray, fiveNorthArray.length)
+//   console.log('fiveSouthArray', fiveSouthArray, fiveSouthArray.length)
+//
+//
+//   fiveAll = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawFiveLine()
+//       for (var i = 0; i < fiveArray.length; i++) {
+//         addMarkerWithTimeout(fiveArray[i], i * 200);
+//       }
+//     } else {
+//     drawFiveLine()
+//     for (var i = 0; i < fiveArray.length; i++) {
+//       addMarkerWithTimeout(fiveArray[i], i * 200);
+//     }
+//   }
+//   }
+//
+//   fiveNorth = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawFiveLine()
+//       for (var i = 0; i < fiveNorthArray.length; i++) {
+//         addMarkerWithTimeout(fiveNorthArray[i], i * 200);
+//       }
+//     } else {
+//     drawFiveLine()
+//     for (var i = 0; i < fiveNorthArray.length; i++) {
+//       addMarkerWithTimeout(fiveNorthArray[i], i * 200);
+//     }
+//   }
+//   }
+//
+//   fiveSouth = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawFiveLine()
+//       for (var i = 0; i < fiveSouthArray.length; i++) {
+//         addMarkerWithTimeout(fiveSouthArray[i], i * 200);
+//       }
+//     } else {
+//     drawFiveLine()
+//     for (var i = 0; i < fiveSouthArray.length; i++) {
+//       addMarkerWithTimeout(fiveSouthArray[i], i * 200);
+//     }
+//    }
+//   }
+//
+//
+// ///// START: LINE 6 FXNS ///////
+//
+//   console.log('lineSix', lineSix, lineSix.length)
+//   // remove duplicates fom lineThree
+//   var lineSixFiltered = lineSix.reduce(function(a,b){
+//     if(a.indexOf(b) < 0) a.push(b);
+//       return a;
+//     },[]);
+//   console.log('lineSixFiltered',lineSixFiltered, lineSixFiltered.length)
+//
+//   for(var i=0; i<lineSixFiltered.length; i++){
+//     stops6.forEach(function(e,k){
+//     if(lineSixFiltered[i] == e.id && lineSixFiltered[i][3] === "N"){
+//       sixNorthArray.push(e.data)
+//     } else if (lineSixFiltered[i] == e.id && lineSixFiltered[i][3] === "S") {
+//       sixSouthArray.push(e.data)
+//     }
+//   })
+//   }
+//
+//   for(var i=0; i<lineSixFiltered.length; i++){
+//    stops6.forEach(function(e,k){
+//    if(lineSixFiltered[i] == e.id){
+//      sixArray.push(e.data)
+//    }
+//   })
+//   }
+//
+//   console.log('sixArray', sixArray, sixArray.length)
+//   console.log('sixNorthArray', sixNorthArray, sixNorthArray.length)
+//   console.log('sixSouthArray', sixSouthArray, sixSouthArray.length)
+//
+//
+//   sixAll = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawSixLine()
+//       for (var i = 0; i < sixArray.length; i++) {
+//         addMarkerWithTimeout(sixArray[i], i * 200);
+//       }
+//     } else {
+//     drawSixLine()
+//     for (var i = 0; i < sixArray.length; i++) {
+//       addMarkerWithTimeout(sixArray[i], i * 200);
+//     }
+//   }
+//   }
+//
+//   sixNorth = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawSixLine()
+//       for (var i = 0; i < sixNorthArray.length; i++) {
+//         addMarkerWithTimeout(sixNorthArray[i], i * 200);
+//       }
+//     } else {
+//     drawSixLine()
+//     for (var i = 0; i < sixNorthArray.length; i++) {
+//       addMarkerWithTimeout(sixNorthArray[i], i * 200);
+//     }
+//   }
+//   }
+//
+//   sixSouth = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawSixLine()
+//       for (var i = 0; i < sixSouthArray.length; i++) {
+//         addMarkerWithTimeout(sixSouthArray[i], i * 200);
+//       }
+//     } else {
+//     drawSixLine()
+//     for (var i = 0; i < sixSouthArray.length; i++) {
+//       addMarkerWithTimeout(sixSouthArray[i], i * 200);
+//     }
+//    }
+//   }
+//
+//
+// ///// START: LINE Shuttle FXNS ///////
+//
+//   console.log('lineShuttle', lineShuttle, lineShuttle.length)
+//   // remove duplicates fom lineThree
+//   var lineShuttleFiltered = lineShuttle.reduce(function(a,b){
+//     if(a.indexOf(b) < 0) a.push(b);
+//       return a;
+//     },[]);
+//   console.log('lineShuttleFiltered',lineShuttleFiltered, lineShuttleFiltered.length)
+//
+//   for(var i=0; i<lineShuttleFiltered.length; i++){
+//     stopsShuttle.forEach(function(e,k){
+//     if(lineShuttleFiltered[i] == e.id && lineShuttleFiltered[i][3] === "N"){
+//       shuttleNorthArray.push(e.data)
+//     } else if (lineShuttleFiltered[i] == e.id && lineShuttleFiltered[i][3] === "S") {
+//       shuttleSouthArray.push(e.data)
+//     }
+//   })
+//   }
+//
+//   for(var i=0; i<lineShuttleFiltered.length; i++){
+//    stopsShuttle.forEach(function(e,k){
+//    if(lineShuttleFiltered[i] == e.id){
+//      shuttleArray.push(e.data)
+//    }
+//   })
+//   }
+//
+//   console.log('shuttleArray', shuttleArray, shuttleArray.length)
+//   console.log('shuttleNorthArray', shuttleNorthArray, shuttleNorthArray.length)
+//   console.log('shuttleSouthArray', shuttleSouthArray, shuttleSouthArray.length)
+//
+//
+//   shuttleAll = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawShuttleLine()
+//       for (var i = 0; i < shuttleArray.length; i++) {
+//         addMarkerWithTimeout(shuttleArray[i], i * 200);
+//       }
+//     } else {
+//     drawShuttleLine()
+//     for (var i = 0; i < shuttleArray.length; i++) {
+//       addMarkerWithTimeout(shuttleArray[i], i * 200);
+//     }
+//   }
+//   }
+//
+//   shuttleNorth = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawShuttleLine()
+//       for (var i = 0; i < shuttleNorthArray.length; i++) {
+//         addMarkerWithTimeout(shuttleNorthArray[i], i * 200);
+//       }
+//     } else {
+//     drawShuttleLine()
+//     for (var i = 0; i < shuttleNorthArray.length; i++) {
+//       addMarkerWithTimeout(shuttleNorthArray[i], i * 200);
+//     }
+//   }
+//   }
+//
+//   shuttleSouth = function() {
+//   clearMarkers();
+//     if (trainTwoPath) {
+//       trainTwoPath.setMap(null)
+//       drawShuttleLine()
+//       for (var i = 0; i < shuttleSouthArray.length; i++) {
+//         addMarkerWithTimeout(shuttleSouthArray[i], i * 200);
+//       }
+//     } else {
+//     drawShuttleLine()
+//     for (var i = 0; i < shuttleSouthArray.length; i++) {
+//       addMarkerWithTimeout(shuttleSouthArray[i], i * 200);
+//     }
+//    }
+//   }
+//
 
 ////START: ADDITIONAL FXNS ////////
 
@@ -383,7 +800,6 @@ $('select.three').change(function() {
 
   ////START: SHAPES1 ////////
   socket.on('shapes1', function(shapes1) {
-    //console.log(shapes1)
     drawOneLine = function() {
     route1 = shapes1
     var train1Coordinates = [];
@@ -407,7 +823,6 @@ $('select.three').change(function() {
 
 ////START: SHAPES2 ////////
   socket.on('shapes2', function(shapes2) {
-    //console.log(shapes1)
     drawTwoLine = function() {
     route2 = shapes2
     var train2Coordinates = [];
@@ -427,11 +842,10 @@ $('select.three').change(function() {
     trainTwoPath.setMap(map);
     }
 
-  }); //socket shapes 2close
+  }); //socket shapes 2 close
 
 ////START: SHAPES3 ////////
 socket.on('shapes3', function(shapes3) {
-  //console.log(shapes1)
   drawThreeLine = function() {
   route3 = shapes3
   var train3Coordinates = [];
@@ -451,9 +865,100 @@ socket.on('shapes3', function(shapes3) {
   trainThreePath.setMap(map);
   }
 
-}); //socket shapes 3close
+}); //socket shapes 3 close
 
-  ////START: SHAPES4 ////////
+////START: SHAPES4 ////////
+socket.on('shapes4', function(shapes4) {
+  drawFourLine = function() {
+  route4 = shapes4
+  var train4Coordinates = [];
+
+  shapes4.forEach(function(e,k){
+    train4Coordinates.push(e)
+  });
+
+  trainFourPath = new google.maps.Polyline({
+    path: train4Coordinates,
+    geodesic: true,
+    strokeColor: '#0000FF',
+    strokeOpacity: 1.0,
+    strokeWeight: 5
+  });
+
+  trainFourPath.setMap(map);
+  }
+
+}); //socket shapes 4 close
+
+
+////START: SHAPES5 ////////
+// socket.on('shapes5', function(shapes5) {
+//   drawFiveLine = function() {
+//   route5 = shapes5
+//   var train5Coordinates = [];
+//
+//   shapes5.forEach(function(e,k){
+//     train5Coordinates.push(e)
+//   });
+//
+//   trainFivePath = new google.maps.Polyline({
+//     path: train5Coordinates,
+//     geodesic: true,
+//     strokeColor: '#0000FF',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 5
+//   });
+//
+//   trainFivePath.setMap(map);
+//   }
+//
+// }); //socket shapes 5 close
+//
+// ////START: SHAPES6 ////////
+// socket.on('shapes6', function(shapes6) {
+//   drawSixLine = function() {
+//   route6 = shapes6
+//   var train6Coordinates = [];
+//
+//   shapes6.forEach(function(e,k){
+//     train6Coordinates.push(e)
+//   });
+//
+//   trainSixPath = new google.maps.Polyline({
+//     path: train6Coordinates,
+//     geodesic: true,
+//     strokeColor: '#0000FF',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 5
+//   });
+//
+//   trainSixPath.setMap(map);
+//   }
+//
+// }); //socket shapes 6 close
+//
+// ////START: SHAPES SHUTTLE ////////
+// socket.on('shapesShuttle', function(shapesShuttle) {
+//   drawShuttleLine = function() {
+//   routeShuttle = shapesShuttle
+//   var trainShuttleCoordinates = [];
+//
+//   shapesShuttle.forEach(function(e,k){
+//     trainShuttleCoordinates.push(e)
+//   });
+//
+//   trainShuttlePath = new google.maps.Polyline({
+//     path: trainShuttleCoordinates,
+//     geodesic: true,
+//     strokeColor: '#0000FF',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 5
+//   });
+//
+//   trainShuttlePath.setMap(map);
+//   }
+//
+// }); //socket shapes Shuttle close
 
     // combined geo-location and layer-transit to compile Google map
     // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation

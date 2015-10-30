@@ -14,10 +14,14 @@ var shapes2 = require('./public/shapes2.js')
 var stops2 = require('./public/stops2.js')
 var shapes3 = require('./public/shapes3.js')
 var stops3 = require('./public/stops3.js')
-// stops1.forEach(function(e,k){
-//   console.log(e.id)
-// });
-
+var shapes4 = require('./public/shapes4.js')
+var stops4 = require('./public/stops4.js')
+// var shapes5 = require('./public/shapes5.js')
+// var stops5 = require('./public/stops5.js')
+// var shapes6 = require('./public/shapes6.js')
+// var stops6 = require('./public/stops6.js')
+// var shapesShuttle = require('./public/shapesShuttle.js')
+// var stopsShuttle = require('./public/stopsShuttle.js')
 
 ///var googleKey = process.env.GOOGLE_TRAINTRACK_API_KEY
 
@@ -69,12 +73,47 @@ var data = function() {
         return schedule.stop_time_update[0].stop_id
       });
 
+      var lineFour = feed.entity.filter(function(entity) {
+        schedule = entity.trip_update
+        return schedule && schedule.trip.route_id == 4 && schedule.stop_time_update[0].stop_id
+      }).map(function(entity) {
+        schedule = entity.trip_update
+        return schedule.stop_time_update[0].stop_id
+      });
+
+      // var lineFive = feed.entity.filter(function(entity) {
+      //   schedule = entity.trip_update
+      //   return schedule && schedule.trip.route_id == 5 && schedule.trip.route_id == '5X' && schedule.stop_time_update[0].stop_id
+      // }).map(function(entity) {
+      //   schedule = entity.trip_update
+      //   return schedule.stop_time_update[0].stop_id
+      // });
+      //
+      // var lineSix = feed.entity.filter(function(entity) {
+      //   schedule = entity.trip_update
+      //   return schedule && schedule.trip.route_id == 6 && schedule.trip.route_id == '6X' && schedule.stop_time_update[0].stop_id
+      // }).map(function(entity) {
+      //   schedule = entity.trip_update
+      //   return schedule.stop_time_update[0].stop_id
+      // });
+      //
+      // var lineShuttle = feed.entity.filter(function(entity) {
+      //   schedule = entity.trip_update
+      //   return schedule && schedule.trip.route_id == 'GS' && schedule.stop_time_update[0].stop_id
+      // }).map(function(entity) {
+      //   schedule = entity.trip_update
+      //   return schedule.stop_time_update[0].stop_id
+      // });
+
       //this sends the data to the client
-      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2, lineThree, stops3);
+      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2, lineThree, stops3, lineFour, stops4);// lineFive, stops5, lineSix, stops6, lineShuttle, stopsShuttle);
       socket.emit('shapes1', shapes1)
       socket.emit('shapes2', shapes2)
       socket.emit('shapes3', shapes3)
-      //console.log(lineOne)
+      socket.emit('shapes4', shapes4)
+      // socket.emit('shapes5', shapes5)
+      // socket.emit('shapes6', shapes6)
+      // socket.emit('shapesShuttle', shapesShuttle)
     }
   });
 
