@@ -9,7 +9,7 @@ html, body {
 
 #floating-panel1 {
   position: absolute;
-  top: 10px;
+  top: 50px;
   left: 25%;
   z-index: 5;
   background-color: #fff;
@@ -19,7 +19,7 @@ html, body {
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
-  margin-left: -250px;
+  margin-left: -200px;
 }
 
 #one-all {
@@ -111,3 +111,8 @@ html, body {
   padding-left: 10px;
   margin-left: 190px;
 }
+ div img.menu {
+  position: absolute;
+  z-index: 1;
+
+ }

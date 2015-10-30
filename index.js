@@ -59,9 +59,6 @@ io.on('connection', function(socket) {
         return schedule.stop_time_update[0].stop_id
       });
 
-
-
-
       //this sends the data to the client
       socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2);
       socket.emit('shapes1', shapes1)

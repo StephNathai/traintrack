@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="floating-panel1">
-      <button id="clear" onclick="clearPolylines()">Map</button>
+      <button id="clear" onclick="clearOnePolylines()">Map</button>
     </div>
     <div id="one-all">
       <button id="oneAll" onclick="oneAll()">One</button>
@@ -29,9 +29,13 @@
     <div id="two-south">
       <button id="twoSouth" onclick="twoSouth()">TwoSouth</button>
     </div>
+    <div>
+      <!-- https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon#size=48 -->
+      <img class="menu" src="/images/menu.png" alt="menu">
+    </div>
+    <div id="map">
 
-
-    <div id="map"></div>
+    </div>
     <!-- <script src="/map.jsx" type="text/jsx"></script>
     <script src="http://fb.me/react-0.12.2.js"></script>
     <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
@@ -57,22 +61,31 @@
     var trainOnePath
     var trainTwoPath;
 
+
       //grabs parsed MTA data and prints it
       socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2){
         console.log('lineOne', lineOne, lineOne.length)
-        for(var i=0; i<lineOne.length; i++){
+
+// remove duplicates fom lineOne
+        var lineOneFiltered = lineOne.reduce(function(a,b){
+          if(a.indexOf(b) < 0) a.push(b);
+            return a;
+          },[]);
+        console.log('lineOneFiltered',lineOneFiltered, lineOneFiltered.length)
+
+        for(var i=0; i<lineOneFiltered.length; i++){
           stops1.forEach(function(e,k){
-          if(lineOne[i] == e.id && lineOne[i][3] === "N"){
+          if(lineOneFiltered[i] == e.id && lineOneFiltered[i][3] === "N"){
             oneNorthArray.push(e.data)
-          } else if (lineOne[i] == e.id && lineOne[i][3] === "S") {
+          } else if (lineOneFiltered[i] == e.id && lineOneFiltered[i][3] === "S") {
             oneSouthArray.push(e.data)
           }
         })
        }
 
-       for(var i=0; i<lineOne.length; i++){
+       for(var i=0; i<lineOneFiltered.length; i++){
          stops1.forEach(function(e,k){
-         if(lineOne[i] == e.id){
+         if(lineOneFiltered[i] == e.id){
            oneArray.push(e.data)
          }
        })
@@ -85,66 +98,73 @@
 
        oneAll = function() {
         clearMarkers();
-        if (trainTwoPath) {
-          trainTwoPath.setMap(null)
+          if (trainTwoPath) {
+            trainTwoPath.setMap(null)
+            drawOneLine()
+            for (var i = 0; i < oneArray.length; i++) {
+              addMarkerWithTimeout(oneArray[i], i * 200);
+            }
+          } else {
           drawOneLine()
           for (var i = 0; i < oneArray.length; i++) {
             addMarkerWithTimeout(oneArray[i], i * 200);
           }
-        } else {
-        drawOneLine()
-        for (var i = 0; i < oneArray.length; i++) {
-          addMarkerWithTimeout(oneArray[i], i * 200);
         }
-       }
-     }
+      }
 
        oneNorth = function() {
         clearMarkers();
-        if (trainTwoPath) {
-          trainTwoPath.setMap(null)
+          if (trainTwoPath) {
+            trainTwoPath.setMap(null)
+            drawOneLine()
+            for (var i = 0; i < oneNorthArray.length; i++) {
+              addMarkerWithTimeout(oneNorthArray[i], i * 200);
+            }
+          } else {
           drawOneLine()
           for (var i = 0; i < oneNorthArray.length; i++) {
             addMarkerWithTimeout(oneNorthArray[i], i * 200);
           }
-        } else {
-        drawOneLine()
-        for (var i = 0; i < oneNorthArray.length; i++) {
-          addMarkerWithTimeout(oneNorthArray[i], i * 200);
         }
        }
-     }
 
        oneSouth = function() {
         clearMarkers();
-        if (trainTwoPath) {
-          trainTwoPath.setMap(null)
+          if (trainTwoPath) {
+            trainTwoPath.setMap(null)
+            drawOneLine()
+            for (var i = 0; i < oneSouthArray.length; i++) {
+              addMarkerWithTimeout(oneSouthArray[i], i * 200);
+            }
+          } else {
           drawOneLine()
           for (var i = 0; i < oneSouthArray.length; i++) {
             addMarkerWithTimeout(oneSouthArray[i], i * 200);
           }
-        } else {
-        drawOneLine()
-        for (var i = 0; i < oneSouthArray.length; i++) {
-          addMarkerWithTimeout(oneSouthArray[i], i * 200);
-        }
+         }
        }
-     }
 
        console.log('lineTwo', lineTwo, lineTwo.length)
-       for(var i=0; i<lineTwo.length; i++){
+// remove duplicates fom lineTwo
+       var lineTwoFiltered = lineTwo.reduce(function(a,b){
+         if(a.indexOf(b) < 0) a.push(b);
+           return a;
+         },[]);
+       console.log('lineTwoFiltered',lineTwoFiltered, lineTwoFiltered.length)
+
+       for(var i=0; i<lineTwoFiltered.length; i++){
          stops2.forEach(function(e,k){
-         if(lineTwo[i] == e.id && lineTwo[i][3] === "N"){
+         if(lineTwoFiltered[i] == e.id && lineTwoFiltered[i][3] === "N"){
            twoNorthArray.push(e.data)
-         } else if (lineTwo[i] == e.id && lineTwo[i][3] === "S") {
+         } else if (lineTwoFiltered[i] == e.id && lineTwoFiltered[i][3] === "S") {
            twoSouthArray.push(e.data)
          }
        })
       }
 
-      for(var i=0; i<lineTwo.length; i++){
+      for(var i=0; i<lineTwoFiltered.length; i++){
         stops2.forEach(function(e,k){
-        if(lineTwo[i] == e.id){
+        if(lineTwoFiltered[i] == e.id){
           twoArray.push(e.data)
         }
       })
@@ -240,7 +260,7 @@
           geodesic: true,
           strokeColor: '#FF0000',
           strokeOpacity: 1.0,
-          strokeWeight: 3
+          strokeWeight: 5
         });
 
         trainOnePath.setMap(map);
@@ -263,7 +283,7 @@
           geodesic: true,
           strokeColor: '#0000FF',
           strokeOpacity: 1.0,
-          strokeWeight: 1
+          strokeWeight: 5
         });
 
         trainTwoPath.setMap(map);
@@ -273,19 +293,19 @@
 
       }); //socket shapes 2close
 
-      clearPolylines = function() {
-        if (trainOnePath) {
+      clearOnePolylines = function() {
+       if (trainOnePath) {
           trainOnePath.setMap(null)
           clearMarkers();
-        } else if (trainTwoPath) {
-          trainTwoPath.setMap(null)
-          clearMarkers();
-        } else if (trainTwoPath && trainOnePath){
-          clearMarkers();
-        } else {
-          clearMarkers();
-        }
+          clearTwoPolylines();
+       }
+     }
+     clearTwoPolylines = function() {
+      if (trainTwoPath) {
+         trainTwoPath.setMap(null)
+         clearMarkers();
       }
+    }
         // combined geo-location and layer-transit to compile Google map
         // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
         // https://developers.google.com/maps/documentation/javascript/examples/layer-transit
@@ -293,14 +313,19 @@
 
           map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.7127, lng: -74.0059}, //this is set to NYC lat and long
-            zoom: 15
+            zoom: 15,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.TOP_CENTER
+            }
           });
 
         //this adds transit layer
-        // transitLayerMap = function() {
-        //   transitLayer = new google.maps.TransitLayer();
-        //   transitLayer.setMap(map);
-        // }
+        //transitLayerMap = function() {
+          transitLayer = new google.maps.TransitLayer();
+          transitLayer.setMap(map);
+        //}
 
         // this grabs the users location if they allow it
           var infoWindow = new google.maps.InfoWindow({map: map});
