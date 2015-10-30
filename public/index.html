@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="floating-panel1">
-      <button id="clear" onclick="clearOnePolylines()">Map</button>
+      <button id="clear" onclick="toggleLayer(transitLayer)">Map</button>
     </div>
     <div id="one-all">
       <button id="oneAll" onclick="oneAll()">One</button>
@@ -61,6 +61,11 @@
     var trainOnePath
     var trainTwoPath;
 
+
+
+    $('img.menu').on('click', function() {
+      $('button').toggle();
+    })
 
       //grabs parsed MTA data and prints it
       socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2){
@@ -235,7 +240,6 @@
        }
 
        clearMarkers = function() {
-        //transitLayerMap();
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
@@ -289,23 +293,8 @@
         trainTwoPath.setMap(map);
         }
 
-
-
       }); //socket shapes 2close
 
-      clearOnePolylines = function() {
-       if (trainOnePath) {
-          trainOnePath.setMap(null)
-          clearMarkers();
-          clearTwoPolylines();
-       }
-     }
-     clearTwoPolylines = function() {
-      if (trainTwoPath) {
-         trainTwoPath.setMap(null)
-         clearMarkers();
-      }
-    }
         // combined geo-location and layer-transit to compile Google map
         // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
         // https://developers.google.com/maps/documentation/javascript/examples/layer-transit
@@ -313,19 +302,17 @@
 
           map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.7127, lng: -74.0059}, //this is set to NYC lat and long
-            zoom: 15,
+            zoom: 13,
             mapTypeControl: true,
             mapTypeControlOptions: {
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              position: google.maps.ControlPosition.TOP_CENTER
+              position: google.maps.ControlPosition.TOP_RIGHT
             }
           });
 
         //this adds transit layer
-        //transitLayerMap = function() {
           transitLayer = new google.maps.TransitLayer();
-          transitLayer.setMap(map);
-        //}
+
 
         // this grabs the users location if they allow it
           var infoWindow = new google.maps.InfoWindow({map: map});
@@ -355,6 +342,16 @@
           infoWindow.setContent(browserHasGeolocation ?
                                 'Error: The Geolocation service failed.' :
                                 'Error: Your browser doesn\'t support geolocation.');
+        }
+
+// toggles transitLayer on and off
+        function toggleLayer(layer){
+          if( layer.getMap() ){
+            layer.setMap(null);
+          } else {
+            layer.setMap(map);
+            clearMarkers();
+          }
         }
 
     </script>
