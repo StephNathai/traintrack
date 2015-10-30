@@ -50,12 +50,12 @@
     var map;
     var route1;
     var route2;
-    var oneArray = [];
-    var oneNorthArray = [];
-    var oneSouthArray = [];
-    var twoArray = [];
-    var twoNorthArray = [];
-    var twoSouthArray = [];
+    var oneArray
+    var oneNorthArray
+    var oneSouthArray
+    var twoArray
+    var twoNorthArray
+    var twoSouthArray
     var markers = [];
     var transitLayer;
     var trainOnePath
@@ -70,6 +70,13 @@
       //grabs parsed MTA data and prints it
       socket.on('parsed_data', function(lineOne, stops1, lineTwo, stops2){
         console.log('lineOne', lineOne, lineOne.length)
+        oneArray = [];
+        oneNorthArray = [];
+        oneSouthArray = [];
+        twoArray = [];
+        twoNorthArray = [];
+        twoSouthArray = [];
+
 
 // remove duplicates fom lineOne
         var lineOneFiltered = lineOne.reduce(function(a,b){

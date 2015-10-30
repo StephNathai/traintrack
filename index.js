@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
     encoding: null
   };
 
-
+var data = function() {
   request(requestSettings, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var feed = GtfsRealtimeBindings.FeedMessage.decode(body);
@@ -68,7 +68,9 @@ io.on('connection', function(socket) {
     }
   });
 
-
+};
+data()
+setInterval(data, 30000)
   // data is in JSON format
   app.get('/data', function(req, res) {
     res.json(tripData);
