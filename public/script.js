@@ -582,86 +582,65 @@ $('select.shuttle').change(function() {
 
 
 // ///// START: LINE Shuttle FXNS ///////
-//
-//   console.log('lineShuttle', lineShuttle, lineShuttle.length)
-//   // remove duplicates fom lineThree
-//   var lineShuttleFiltered = lineShuttle.reduce(function(a,b){
-//     if(a.indexOf(b) < 0) a.push(b);
-//       return a;
-//     },[]);
-//   console.log('lineShuttleFiltered',lineShuttleFiltered, lineShuttleFiltered.length)
-//
-//   for(var i=0; i<lineShuttleFiltered.length; i++){
-//     stopsShuttle.forEach(function(e,k){
-//     if(lineShuttleFiltered[i] == e.id && lineShuttleFiltered[i][3] === "N"){
-//       shuttleNorthArray.push(e.data)
-//     } else if (lineShuttleFiltered[i] == e.id && lineShuttleFiltered[i][3] === "S") {
-//       shuttleSouthArray.push(e.data)
-//     }
-//   })
-//   }
-//
-//   for(var i=0; i<lineShuttleFiltered.length; i++){
-//    stopsShuttle.forEach(function(e,k){
-//    if(lineShuttleFiltered[i] == e.id){
-//      shuttleArray.push(e.data)
-//    }
-//   })
-//   }
-//
-//   console.log('shuttleArray', shuttleArray, shuttleArray.length)
-//   console.log('shuttleNorthArray', shuttleNorthArray, shuttleNorthArray.length)
-//   console.log('shuttleSouthArray', shuttleSouthArray, shuttleSouthArray.length)
-//
-//
-//   shuttleAll = function() {
-//   clearMarkers();
-//     if (trainTwoPath) {
-//       trainTwoPath.setMap(null)
-//       drawShuttleLine()
-//       for (var i = 0; i < shuttleArray.length; i++) {
-//         addMarkerWithTimeout(shuttleArray[i], i * 200);
-//       }
-//     } else {
-//     drawShuttleLine()
-//     for (var i = 0; i < shuttleArray.length; i++) {
-//       addMarkerWithTimeout(shuttleArray[i], i * 200);
-//     }
-//   }
-//   }
-//
-//   shuttleNorth = function() {
-//   clearMarkers();
-//     if (trainTwoPath) {
-//       trainTwoPath.setMap(null)
-//       drawShuttleLine()
-//       for (var i = 0; i < shuttleNorthArray.length; i++) {
-//         addMarkerWithTimeout(shuttleNorthArray[i], i * 200);
-//       }
-//     } else {
-//     drawShuttleLine()
-//     for (var i = 0; i < shuttleNorthArray.length; i++) {
-//       addMarkerWithTimeout(shuttleNorthArray[i], i * 200);
-//     }
-//   }
-//   }
-//
-//   shuttleSouth = function() {
-//   clearMarkers();
-//     if (trainTwoPath) {
-//       trainTwoPath.setMap(null)
-//       drawShuttleLine()
-//       for (var i = 0; i < shuttleSouthArray.length; i++) {
-//         addMarkerWithTimeout(shuttleSouthArray[i], i * 200);
-//       }
-//     } else {
-//     drawShuttleLine()
-//     for (var i = 0; i < shuttleSouthArray.length; i++) {
-//       addMarkerWithTimeout(shuttleSouthArray[i], i * 200);
-//     }
-//    }
-//   }
-//
+
+  console.log('lineShuttle', lineShuttle, lineShuttle.length)
+  // remove duplicates from lineShuttle
+  var lineShuttleFiltered = lineShuttle.reduce(function(a,b){
+    if(a.indexOf(b) < 0) a.push(b);
+      return a;
+    },[]);
+  console.log('lineShuttleFiltered',lineShuttleFiltered, lineShuttleFiltered.length)
+
+  for(var i=0; i<lineShuttleFiltered.length; i++){
+    stopsShuttle.forEach(function(e,k){
+    if(lineShuttleFiltered[i] == e.id && lineShuttleFiltered[i][3] === "N"){
+      shuttleNorthArray.push(e.data)
+    } else if (lineShuttleFiltered[i] == e.id && lineShuttleFiltered[i][3] === "S") {
+      shuttleSouthArray.push(e.data)
+    }
+  })
+  }
+
+  for(var i=0; i<lineShuttleFiltered.length; i++){
+   stopsShuttle.forEach(function(e,k){
+   if(lineShuttleFiltered[i] == e.id){
+     shuttleArray.push(e.data)
+   }
+  })
+  }
+
+  console.log('shuttleArray', shuttleArray, shuttleArray.length)
+  console.log('shuttleNorthArray', shuttleNorthArray, shuttleNorthArray.length)
+  console.log('shuttleSouthArray', shuttleSouthArray, shuttleSouthArray.length)
+
+
+  shuttleAll = function() {
+  clearMarkers();
+  clearPolylines();
+    drawShuttleLine()
+    for (var i = 0; i < shuttleArray.length; i++) {
+      addMarkerWithTimeout(shuttleArray[i], i * 200);
+    }
+  }
+
+  shuttleNorth = function() {
+  clearMarkers();
+  clearPolylines();
+  drawShuttleLine()
+    for (var i = 0; i < shuttleNorthArray.length; i++) {
+      addMarkerWithTimeout(shuttleNorthArray[i], i * 200);
+    }
+  }
+
+  shuttleSouth = function() {
+  clearMarkers();
+  clearPolylines();
+  drawShuttleLine()
+    for (var i = 0; i < shuttleSouthArray.length; i++) {
+      addMarkerWithTimeout(shuttleSouthArray[i], i * 200);
+    }
+  }
+
 
 ////START: ADDITIONAL FXNS ////////
 
@@ -686,6 +665,7 @@ $('select.shuttle').change(function() {
 //CLEAR POLYLINES FXN //
 //need to fix this function
     clearPolylines = function() {
+      clearMarkers();
       if (trainOnePath) {
         trainOnePath.setMap(null)
       } else if (trainTwoPath) {
@@ -696,6 +676,10 @@ $('select.shuttle').change(function() {
         trainFourPath.setMap(null)
       } else if (trainFivePath) {
         trainFivePath.setMap(null)
+      } else if (trainSixPath) {
+        trainSixPath.setMap(null)
+      } else if (trainShuttlePath) {
+        trainShuttlePath.setMap(null)
       } else {
         console.log("All polylines cleared.")
       }
@@ -851,29 +835,29 @@ socket.on('shapes6', function(shapes6) {
   }
 
 }); //socket shapes 6 close
-//
-// ////START: SHAPES SHUTTLE ////////
-// socket.on('shapesShuttle', function(shapesShuttle) {
-//   drawShuttleLine = function() {
-//   routeShuttle = shapesShuttle
-//   var trainShuttleCoordinates = [];
-//
-//   shapesShuttle.forEach(function(e,k){
-//     trainShuttleCoordinates.push(e)
-//   });
-//
-//   trainShuttlePath = new google.maps.Polyline({
-//     path: trainShuttleCoordinates,
-//     geodesic: true,
-//     strokeColor: '#0000FF',
-//     strokeOpacity: 1.0,
-//     strokeWeight: 5
-//   });
-//
-//   trainShuttlePath.setMap(map);
-//   }
-//
-// }); //socket shapes Shuttle close
+
+////START: SHAPES SHUTTLE ////////
+socket.on('shapesShuttle', function(shapesShuttle) {
+  drawShuttleLine = function() {
+  routeShuttle = shapesShuttle
+  var trainShuttleCoordinates = [];
+
+  shapesShuttle.forEach(function(e,k){
+    trainShuttleCoordinates.push(e)
+  });
+
+  trainShuttlePath = new google.maps.Polyline({
+    path: trainShuttleCoordinates,
+    geodesic: true,
+    strokeColor: '#787878',
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  });
+
+  trainShuttlePath.setMap(map);
+  }
+
+}); //socket shapes Shuttle close
 
     // combined geo-location and layer-transit to compile Google map
     // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
