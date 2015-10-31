@@ -7,149 +7,117 @@ html, body {
   height: 100%;
 }
 
-#floating-panel1 {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  margin-left: -200px;
-}
-
-#one-all {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  margin-left: -152px;
-}
-
-#one-north {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  margin-left: -100px;
-}
-
-#one-south {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  margin-left: -20px;
-}
-
-#two-all {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  margin-left: 60px;
-}
-
-#two-north {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  margin-left: 110px;
-}
-
-#two-south {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-
-  margin-left: 190px;
-}
- div img.menu {
+ div.menu {
   position: absolute;
   z-index: 1;
  }
 
- div.one{
+ div.nav {
    position: absolute;
-   z-index: 1;
-   left: 200px;
-   top: 2%;
+   top: 1%;
+   left: 10%;
+   right: 10%;
+   z-index: 5;
+   width: 80%;
+   height: 38px;
+   background-color: black;
+   display: none;
  }
 
- div.two{
-   position: absolute;
+ button.clear {
+   position: relative;
    z-index: 1;
-   left: 300px;
-   top: 2%;
- }
- div.three{
-   position: absolute;
-   z-index: 1;
-   left: 400px;
-   top: 2%;
- }
- div.four{
-   position: absolute;
-   z-index: 1;
-   left: 500px;
-   top: 2%;
- }
- div.five{
-   position: absolute;
-   z-index: 1;
-   left: 600px;
-   top: 2%;
- }
- div.six{
-   position: absolute;
-   z-index: 1;
-   left: 700px;
-   top: 2%;
- }
- div.shuttle{
-   position: absolute;
-   z-index: 1;
-   left: 800px;
-   top: 2%;
+   margin-left: 1%;
+   margin-right: 2%;
+   height: 20px;
+   background: #939393;
+   color: white;
+   border-radius: 6px;
+   width: 85px;
+   top: 20%;
  }
 
- button.clear-markers {
-   position: absolute;
+ button.transit {
+   position: relative;
    z-index: 1;
-   left: 130px;
-   top: 2%;
+   margin-left: 1%;
+   margin-right: 2%;
+   height: 20px;
+   background: #939393;
+   color: white;
+   border-radius: 6px;
+   width: 85px;
+   top: 20%;
+ }
+
+ select.one{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 2%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
+ }
+
+ select.two{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 2%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
+ }
+ select.three{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 2%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
+ }
+ select.four{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 2%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
+ }
+ select.five{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 2%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
+ }
+ select.six{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 2%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
+ }
+ select.shuttle{
+   position: relative;
+   z-index: 1;
+   margin-left: 1%;
+   margin-right: 1%;
+   width: 85px;
+   background: #434343;
+   color: white;
+   top: 20%;
  }

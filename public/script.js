@@ -80,13 +80,30 @@ var shuttleNorth;
 var shuttleSouth;
 
 
-$('img.menu').on('click', function() {
-  $('select').toggle();
+$('img.menu-open').on('click', function() {
+  $('div.nav').toggle();
+  menuImageToggle(this);
 })
 
-$('button.clear-markers').on('click', function() {
+$('button.clear').on('click', function() {
   clearPolylines();
 })
+
+$('button.transit').on('click', function() {
+  toggleLayer()();
+})
+
+
+var menuImageToggle = function(img){
+  if (img.className!='menu-close'){
+    img.src="/images/menu-close.png";
+    img.className='menu-close';
+  } else if(img.className == 'menu-close') {
+    img.src= "/images/menu-open.png";
+    img.className='menu-open'
+  }
+  return false;
+}
 
 //////// START: LINE 1 SELECTORS //////////
 $('select.one').change(function() {
@@ -865,13 +882,9 @@ socket.on('shapesShuttle', function(shapesShuttle) {
     window.initMap = function() {
 
       map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.7127, lng: -74.0059}, //this is set to NYC lat and long
+        center: {lat: 40.75529, lng: -73.987495}, //this is set to NYC lat and long
         zoom: 13,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-          position: google.maps.ControlPosition.TOP_RIGHT
-        }
+        mapTypeControl: false
       });
 
     //this adds transit layer
@@ -889,7 +902,7 @@ socket.on('shapesShuttle', function(shapesShuttle) {
           };
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
+          infoWindow.setContent('You are here.');
           map.setCenter(pos);
 
         }, function() {

@@ -10,61 +10,45 @@
   </head>
   <body>
     <script src="/socket.io/socket.io.js"></script>
-    <div id="floating-panel1">
-      <button id="clear" onclick="toggleLayer()">Transit</button>
-    </div>
-    <div>
-      <button class="clear-markers">Clear Map</button>
-    </div>
-    <div class="one">
+    <div class="nav">
+      <button class="clear">Clear Map</button>
+      <button class="transit">Transit</button>
       <select class="one">
         <option class="one" value="" disabled selected>One</option>
         <option class="one" value="oneAll">One All</option>
         <option class="one" value="oneNorth">One North</option>
         <option class="one" value="oneSouth">One South</option>
       </select>
-    </div>
-    <div class="two">
       <select class="two">
         <option class="two" value="" disabled selected>Two</option>
         <option class="two" value="twoAll">Two All</option>
         <option class="two" value="twoNorth">Two North</option>
         <option class="two" value="twoSouth">Two South</option>
       </select>
-    </div>
-    <div class="three">
       <select class="three">
         <option class="three" value="" disabled selected>Three</option>
         <option class="three" value="threeAll">Three All</option>
         <option class="three" value="threeNorth">Three North</option>
         <option class="three" value="threeSouth">Three South</option>
       </select>
-    </div>
-    <div class="four">
       <select class="four">
         <option class="four" value="" disabled selected>Four</option>
         <option class="four" value="fourAll">Four All</option>
         <option class="four" value="fourNorth">Four North</option>
         <option class="four" value="fourSouth">Four South</option>
       </select>
-    </div>
-    <div class="five">
       <select class="five">
         <option class="five" value="" disabled selected>Five</option>
         <option class="five" value="fiveAll">Five All</option>
         <option class="five" value="fiveNorth">Five North</option>
         <option class="five" value="fiveSouth">Five South</option>
       </select>
-    </div>
-    <div class="six">
       <select class="six">
         <option class="six" value="" disabled selected>Six</option>
         <option class="six" value="sixAll">Six All</option>
         <option class="six" value="sixNorth">Six North</option>
         <option class="six" value="sixSouth">Six South</option>
       </select>
-    </div>
-    <div class="shuttle">
       <select class="shuttle">
         <option class="shuttle" value="" disabled selected>Shuttle</option>
         <option class="shuttle" value="shuttleAll">Shuttle All</option>
@@ -73,9 +57,9 @@
       </select>
     </div>
 
-    <div>
+    <div class="menu">
       <!-- https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon#size=48 -->
-      <img class="menu" src="/images/menu.png" alt="menu">
+      <img class="menu-open" src="/images/menu-open.png" alt="menu">
     </div>
     <div id="map"></div>
     <!-- <script src="/map.jsx" type="text/jsx"></script>
