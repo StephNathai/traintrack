@@ -147,7 +147,7 @@ html, body {
    top: 2%;
  }
 
- button#clear-markers {
+ button.clear-markers {
    position: absolute;
    z-index: 1;
    left: 130px;
