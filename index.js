@@ -16,8 +16,8 @@ var shapes3 = require('./public/shapes3.js')
 var stops3 = require('./public/stops3.js')
 var shapes4 = require('./public/shapes4.js')
 var stops4 = require('./public/stops4.js')
-// var shapes5 = require('./public/shapes5.js')
-// var stops5 = require('./public/stops5.js')
+var shapes5 = require('./public/shapes5.js')
+var stops5 = require('./public/stops5.js')
 // var shapes6 = require('./public/shapes6.js')
 // var stops6 = require('./public/stops6.js')
 // var shapesShuttle = require('./public/shapesShuttle.js')
@@ -81,14 +81,14 @@ var data = function() {
         return schedule.stop_time_update[0].stop_id
       });
 
-      // var lineFive = feed.entity.filter(function(entity) {
-      //   schedule = entity.trip_update
-      //   return schedule && schedule.trip.route_id == 5 && schedule.trip.route_id == '5X' && schedule.stop_time_update[0].stop_id
-      // }).map(function(entity) {
-      //   schedule = entity.trip_update
-      //   return schedule.stop_time_update[0].stop_id
-      // });
-      //
+      var lineFive = feed.entity.filter(function(entity) {
+        schedule = entity.trip_update
+        return (schedule && schedule.trip.route_id == 5 || schedule && schedule.trip.route_id == '5X') && schedule.stop_time_update[0].stop_id
+      }).map(function(entity) {
+        schedule = entity.trip_update
+        return schedule.stop_time_update[0].stop_id
+      });
+
       // var lineSix = feed.entity.filter(function(entity) {
       //   schedule = entity.trip_update
       //   return schedule && schedule.trip.route_id == 6 && schedule.trip.route_id == '6X' && schedule.stop_time_update[0].stop_id
@@ -106,12 +106,12 @@ var data = function() {
       // });
 
       //this sends the data to the client
-      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2, lineThree, stops3, lineFour, stops4);// lineFive, stops5, lineSix, stops6, lineShuttle, stopsShuttle);
+      socket.emit('parsed_data', lineOne, stops1, lineTwo, stops2, lineThree, stops3, lineFour, stops4, lineFive, stops5);// , lineSix, stops6, lineShuttle, stopsShuttle);
       socket.emit('shapes1', shapes1)
       socket.emit('shapes2', shapes2)
       socket.emit('shapes3', shapes3)
       socket.emit('shapes4', shapes4)
-      // socket.emit('shapes5', shapes5)
+      socket.emit('shapes5', shapes5)
       // socket.emit('shapes6', shapes6)
       // socket.emit('shapesShuttle', shapesShuttle)
     }

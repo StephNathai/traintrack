@@ -532,86 +532,86 @@ $('select.shuttle').change(function() {
 
 ///// START: LINE 5 FXNS ///////
 
-//   console.log('lineFive', lineFive, lineFive.length)
-//   // remove duplicates fom lineThree
-//   var lineFiveFiltered = lineFive.reduce(function(a,b){
-//     if(a.indexOf(b) < 0) a.push(b);
-//       return a;
-//     },[]);
-//   console.log('lineFiveFiltered',lineFiveFiltered, lineFiveFiltered.length)
-//
-//   for(var i=0; i<lineFiveFiltered.length; i++){
-//     stops5.forEach(function(e,k){
-//     if(lineFiveFiltered[i] == e.id && lineFiveFiltered[i][3] === "N"){
-//       fiveNorthArray.push(e.data)
-//     } else if (lineFiveFiltered[i] == e.id && lineFiveFiltered[i][3] === "S") {
-//       fiveSouthArray.push(e.data)
-//     }
-//   })
-//   }
-//
-//   for(var i=0; i<lineFiveFiltered.length; i++){
-//    stops5.forEach(function(e,k){
-//    if(lineFiveFiltered[i] == e.id){
-//      fiveArray.push(e.data)
-//    }
-//   })
-//   }
-//
-//   console.log('fiveArray', fiveArray, fiveArray.length)
-//   console.log('fiveNorthArray', fiveNorthArray, fiveNorthArray.length)
-//   console.log('fiveSouthArray', fiveSouthArray, fiveSouthArray.length)
-//
-//
-//   fiveAll = function() {
-//   clearMarkers();
-//     if (trainTwoPath) {
-//       trainTwoPath.setMap(null)
-//       drawFiveLine()
-//       for (var i = 0; i < fiveArray.length; i++) {
-//         addMarkerWithTimeout(fiveArray[i], i * 200);
-//       }
-//     } else {
-//     drawFiveLine()
-//     for (var i = 0; i < fiveArray.length; i++) {
-//       addMarkerWithTimeout(fiveArray[i], i * 200);
-//     }
-//   }
-//   }
-//
-//   fiveNorth = function() {
-//   clearMarkers();
-//     if (trainTwoPath) {
-//       trainTwoPath.setMap(null)
-//       drawFiveLine()
-//       for (var i = 0; i < fiveNorthArray.length; i++) {
-//         addMarkerWithTimeout(fiveNorthArray[i], i * 200);
-//       }
-//     } else {
-//     drawFiveLine()
-//     for (var i = 0; i < fiveNorthArray.length; i++) {
-//       addMarkerWithTimeout(fiveNorthArray[i], i * 200);
-//     }
-//   }
-//   }
-//
-//   fiveSouth = function() {
-//   clearMarkers();
-//     if (trainTwoPath) {
-//       trainTwoPath.setMap(null)
-//       drawFiveLine()
-//       for (var i = 0; i < fiveSouthArray.length; i++) {
-//         addMarkerWithTimeout(fiveSouthArray[i], i * 200);
-//       }
-//     } else {
-//     drawFiveLine()
-//     for (var i = 0; i < fiveSouthArray.length; i++) {
-//       addMarkerWithTimeout(fiveSouthArray[i], i * 200);
-//     }
-//    }
-//   }
-//
-//
+  console.log('lineFive', lineFive, lineFive.length)
+  // remove duplicates fom lineFive
+  var lineFiveFiltered = lineFive.reduce(function(a,b){
+    if(a.indexOf(b) < 0) a.push(b);
+      return a;
+    },[]);
+  console.log('lineFiveFiltered',lineFiveFiltered, lineFiveFiltered.length)
+
+  for(var i=0; i<lineFiveFiltered.length; i++){
+    stops5.forEach(function(e,k){
+    if(lineFiveFiltered[i] == e.id && lineFiveFiltered[i][3] === "N"){
+      fiveNorthArray.push(e.data)
+    } else if (lineFiveFiltered[i] == e.id && lineFiveFiltered[i][3] === "S") {
+      fiveSouthArray.push(e.data)
+    }
+  })
+  }
+
+  for(var i=0; i<lineFiveFiltered.length; i++){
+   stops5.forEach(function(e,k){
+   if(lineFiveFiltered[i] == e.id){
+     fiveArray.push(e.data)
+   }
+  })
+  }
+
+  console.log('fiveArray', fiveArray, fiveArray.length)
+  console.log('fiveNorthArray', fiveNorthArray, fiveNorthArray.length)
+  console.log('fiveSouthArray', fiveSouthArray, fiveSouthArray.length)
+
+
+  fiveAll = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawFiveLine()
+      for (var i = 0; i < fiveArray.length; i++) {
+        addMarkerWithTimeout(fiveArray[i], i * 200);
+      }
+    } else {
+    drawFiveLine()
+    for (var i = 0; i < fiveArray.length; i++) {
+      addMarkerWithTimeout(fiveArray[i], i * 200);
+    }
+  }
+  }
+
+  fiveNorth = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawFiveLine()
+      for (var i = 0; i < fiveNorthArray.length; i++) {
+        addMarkerWithTimeout(fiveNorthArray[i], i * 200);
+      }
+    } else {
+    drawFiveLine()
+    for (var i = 0; i < fiveNorthArray.length; i++) {
+      addMarkerWithTimeout(fiveNorthArray[i], i * 200);
+    }
+  }
+  }
+
+  fiveSouth = function() {
+  clearMarkers();
+    if (trainTwoPath) {
+      trainTwoPath.setMap(null)
+      drawFiveLine()
+      for (var i = 0; i < fiveSouthArray.length; i++) {
+        addMarkerWithTimeout(fiveSouthArray[i], i * 200);
+      }
+    } else {
+    drawFiveLine()
+    for (var i = 0; i < fiveSouthArray.length; i++) {
+      addMarkerWithTimeout(fiveSouthArray[i], i * 200);
+    }
+   }
+  }
+
+
 // ///// START: LINE 6 FXNS ///////
 //
 //   console.log('lineSix', lineSix, lineSix.length)
@@ -892,28 +892,28 @@ socket.on('shapes4', function(shapes4) {
 
 
 ////START: SHAPES5 ////////
-// socket.on('shapes5', function(shapes5) {
-//   drawFiveLine = function() {
-//   route5 = shapes5
-//   var train5Coordinates = [];
-//
-//   shapes5.forEach(function(e,k){
-//     train5Coordinates.push(e)
-//   });
-//
-//   trainFivePath = new google.maps.Polyline({
-//     path: train5Coordinates,
-//     geodesic: true,
-//     strokeColor: '#0000FF',
-//     strokeOpacity: 1.0,
-//     strokeWeight: 5
-//   });
-//
-//   trainFivePath.setMap(map);
-//   }
-//
-// }); //socket shapes 5 close
-//
+socket.on('shapes5', function(shapes5) {
+  drawFiveLine = function() {
+  route5 = shapes5
+  var train5Coordinates = [];
+
+  shapes5.forEach(function(e,k){
+    train5Coordinates.push(e)
+  });
+
+  trainFivePath = new google.maps.Polyline({
+    path: train5Coordinates,
+    geodesic: true,
+    strokeColor: '#0000FF',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  trainFivePath.setMap(map);
+  }
+
+}); //socket shapes 5 close
+
 // ////START: SHAPES6 ////////
 // socket.on('shapes6', function(shapes6) {
 //   drawSixLine = function() {
