@@ -6,6 +6,7 @@ var map;
 var markers = [];
 var transitLayer;
 var clearPolylines;
+var icons;
 
 var route1;
 var route2;
@@ -95,12 +96,12 @@ $('button.transit').on('click', function() {
 
 
 var menuImageToggle = function(img){
-  if (img.className!='menu-close'){
+  if (img.class!='menu-close'){
     img.src="/images/menu-close.png";
-    img.className='menu-close';
-  } else if(img.className == 'menu-close') {
+    img.class='menu-close';
+  } else if(img.class == 'menu-close') {
     img.src= "/images/menu-open.png";
-    img.className='menu-open'
+    img.class='menu-open'
   }
   return false;
 }
@@ -265,7 +266,7 @@ $('select.shuttle').change(function() {
     clearPolylines();
     drawOneLine()
       for (var i = 0; i < oneArray.length; i++) {
-        addMarkerWithTimeout(oneArray[i], i * 200);
+        addMarkerWithTimeout(oneArray[i], i * 200, 'red');
       }
     }
 
@@ -275,7 +276,7 @@ $('select.shuttle').change(function() {
     clearPolylines();
     drawOneLine()
       for (var i = 0; i < oneNorthArray.length; i++) {
-        addMarkerWithTimeout(oneNorthArray[i], i * 200);
+        addMarkerWithTimeout(oneNorthArray[i], i * 200, 'red');
       }
     }
 
@@ -285,7 +286,7 @@ $('select.shuttle').change(function() {
     clearPolylines();
     drawOneLine()
       for (var i = 0; i < oneSouthArray.length; i++) {
-        addMarkerWithTimeout(oneSouthArray[i], i * 200);
+        addMarkerWithTimeout(oneSouthArray[i], i * 200, 'red');
       }
     }
 
@@ -327,7 +328,7 @@ $('select.shuttle').change(function() {
    clearPolylines();
    drawTwoLine();
      for (var i = 0; i < twoArray.length; i++) {
-       addMarkerWithTimeout(twoArray[i], i * 200);
+       addMarkerWithTimeout(twoArray[i], i * 200, 'red');
      }
   }
 
@@ -336,7 +337,7 @@ $('select.shuttle').change(function() {
    clearPolylines();
    drawTwoLine();
      for (var i = 0; i < twoNorthArray.length; i++) {
-       addMarkerWithTimeout(twoNorthArray[i], i * 200);
+       addMarkerWithTimeout(twoNorthArray[i], i * 200, 'red');
      }
   }
 
@@ -345,7 +346,7 @@ $('select.shuttle').change(function() {
    clearPolylines();
    drawTwoLine();
      for (var i = 0; i < twoSouthArray.length; i++) {
-       addMarkerWithTimeout(twoSouthArray[i], i * 200);
+       addMarkerWithTimeout(twoSouthArray[i], i * 200, 'red');
      }
   }
 
@@ -387,7 +388,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawThreeLine()
     for (var i = 0; i < threeArray.length; i++) {
-      addMarkerWithTimeout(threeArray[i], i * 200);
+      addMarkerWithTimeout(threeArray[i], i * 200, 'red');
     }
   }
 
@@ -397,7 +398,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawThreeLine()
     for (var i = 0; i < threeNorthArray.length; i++) {
-      addMarkerWithTimeout(threeNorthArray[i], i * 200);
+      addMarkerWithTimeout(threeNorthArray[i], i * 200, 'red');
     }
   }
 
@@ -407,7 +408,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawThreeLine()
     for (var i = 0; i < threeSouthArray.length; i++) {
-      addMarkerWithTimeout(threeSouthArray[i], i * 200);
+      addMarkerWithTimeout(threeSouthArray[i], i * 200, 'red');
     }
   }
 
@@ -450,7 +451,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawFourLine()
     for (var i = 0; i < fourArray.length; i++) {
-      addMarkerWithTimeout(fourArray[i], i * 200);
+      addMarkerWithTimeout(fourArray[i], i * 200, 'green');
     }
   }
 
@@ -459,7 +460,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawFourLine()
     for (var i = 0; i < fourNorthArray.length; i++) {
-      addMarkerWithTimeout(fourNorthArray[i], i * 200);
+      addMarkerWithTimeout(fourNorthArray[i], i * 200, 'green');
     }
   }
 
@@ -469,7 +470,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawFourLine()
     for (var i = 0; i < fourSouthArray.length; i++) {
-      addMarkerWithTimeout(fourSouthArray[i], i * 200);
+      addMarkerWithTimeout(fourSouthArray[i], i * 200, 'green');
     }
   }
 
@@ -513,7 +514,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawFiveLine()
     for (var i = 0; i < fiveArray.length; i++) {
-      addMarkerWithTimeout(fiveArray[i], i * 200);
+      addMarkerWithTimeout(fiveArray[i], i * 200, 'green');
     }
   }
 
@@ -522,7 +523,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawFiveLine()
     for (var i = 0; i < fiveNorthArray.length; i++) {
-      addMarkerWithTimeout(fiveNorthArray[i], i * 200);
+      addMarkerWithTimeout(fiveNorthArray[i], i * 200, 'green');
     }
   }
 
@@ -531,7 +532,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawFiveLine()
     for (var i = 0; i < fiveSouthArray.length; i++) {
-      addMarkerWithTimeout(fiveSouthArray[i], i * 200);
+      addMarkerWithTimeout(fiveSouthArray[i], i * 200, 'green');
     }
   }
 
@@ -575,7 +576,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawSixLine()
     for (var i = 0; i < sixArray.length; i++) {
-      addMarkerWithTimeout(sixArray[i], i * 200);
+      addMarkerWithTimeout(sixArray[i], i * 200, 'green');
     }
   }
 
@@ -584,7 +585,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawSixLine()
     for (var i = 0; i < sixNorthArray.length; i++) {
-      addMarkerWithTimeout(sixNorthArray[i], i * 200);
+      addMarkerWithTimeout(sixNorthArray[i], i * 200, 'green');
     }
   }
 
@@ -593,7 +594,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawSixLine()
     for (var i = 0; i < sixSouthArray.length; i++) {
-      addMarkerWithTimeout(sixSouthArray[i], i * 200);
+      addMarkerWithTimeout(sixSouthArray[i], i * 200, 'green');
     }
  }
 
@@ -636,7 +637,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
     drawShuttleLine()
     for (var i = 0; i < shuttleArray.length; i++) {
-      addMarkerWithTimeout(shuttleArray[i], i * 200);
+      addMarkerWithTimeout(shuttleArray[i], i * 200, 'gray');
     }
   }
 
@@ -645,7 +646,7 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawShuttleLine()
     for (var i = 0; i < shuttleNorthArray.length; i++) {
-      addMarkerWithTimeout(shuttleNorthArray[i], i * 200);
+      addMarkerWithTimeout(shuttleNorthArray[i], i * 200, 'gray');
     }
   }
 
@@ -654,18 +655,34 @@ $('select.shuttle').change(function() {
   clearPolylines();
   drawShuttleLine()
     for (var i = 0; i < shuttleSouthArray.length; i++) {
-      addMarkerWithTimeout(shuttleSouthArray[i], i * 200);
+      addMarkerWithTimeout(shuttleSouthArray[i], i * 200, 'gray');
     }
   }
 
 
 ////START: ADDITIONAL FXNS ////////
 
-   function addMarkerWithTimeout(position, timeout) {
+icons = {
+  green: {
+    icon: 'images/green.png'
+    //https://www.iconfinder.com/icons/34211/green_icon#size=16
+  },
+  red: {
+    icon: 'images/red.png'
+    //https://www.iconfinder.com/icons/34214/circle_green_icon#size=16
+  },
+  gray: {
+    icon: 'images/gray.png'
+    //https://www.iconfinder.com/icons/34212/circle_grey_icon#size=16
+  }
+};
+
+   function addMarkerWithTimeout(position, timeout, color) {
     window.setTimeout(function() {
       markers.push(new google.maps.Marker({
         position: position,
         map: map,
+        icon: icons[color].icon,
         animation: google.maps.Animation.DROP
       }));
     }, timeout);
