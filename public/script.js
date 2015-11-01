@@ -943,8 +943,8 @@ socket.on('shapesShuttle', function(shapesShuttle) {
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
       infoWindow.setContent(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
+                            'Sorry, we couldn\'t find your location.' :
+                            'Sorry, your browser doesn\'t support geolocation.');
     }
 
 
