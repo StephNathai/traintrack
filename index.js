@@ -120,7 +120,6 @@ var data = function() {
 };
 data()
 setInterval(data, 30000)
-
   // data is in JSON format
   app.get('/data', function(req, res) {
     res.json(tripData);
