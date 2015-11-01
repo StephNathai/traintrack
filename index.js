@@ -25,7 +25,7 @@ var stopsShuttle = require('./public/stopsShuttle.js')
 
 ///var googleKey = process.env.GOOGLE_TRAINTRACK_API_KEY
 
-var server = app.listen(3000)
+var server = app.listen(3000 || process.env.PORT)
 var io     = require('socket.io')(server);
 
 app.use(morgan('combined'));
