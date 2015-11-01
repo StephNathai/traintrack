@@ -16,20 +16,20 @@ html, body {
  div.nav {
    position: absolute;
    top: 1%;
-   left: 10%;
-   right: 10%;
+   left: 15%;
+   right: 15%;
    z-index: 5;
-   width: 80%;
-   height: 38px;
+   width: 70%;
    background-color: black;
    display: none;
+   background: rgba(0,0,0,.3);
  }
 
  button.clear {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    height: 20px;
    background: #939393;
    color: white;
@@ -43,7 +43,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    height: 20px;
    background: #939393;
    color: white;
@@ -57,7 +57,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    width: 85px;
    background: #434343;
    color: white;
@@ -69,7 +69,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    width: 85px;
    background: #434343;
    color: white;
@@ -80,7 +80,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    width: 85px;
    background: #434343;
    color: white;
@@ -91,7 +91,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    width: 85px;
    background: #434343;
    color: white;
@@ -102,7 +102,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    width: 85px;
    background: #434343;
    color: white;
@@ -113,7 +113,7 @@ html, body {
    position: relative;
    z-index: 1;
    margin-left: 1%;
-   margin-right: 2%;
+   margin-right: 1%;
    width: 85px;
    background: #434343;
    color: white;
@@ -130,14 +130,4 @@ html, body {
    color: white;
    top: 20%;
    margin-bottom: 1%;
- }
-
- 1140 x
-
-
-
- @media all and (max-width: 1170px) {
-   div.nav {
-     height: 65px;
-   }
  }
