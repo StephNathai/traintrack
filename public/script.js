@@ -94,6 +94,14 @@ $('button.transit').on('click', function() {
   toggleLayer();
 })
 
+$('div.info').on('click', function() {
+  $('div.info-box').toggle();
+})
+
+$('img.close').on('click', function() {
+  $('div.info-box').toggle();
+})
+
 
 var menuImageToggle = function(img){
   if (img.class!='menu-close'){
