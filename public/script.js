@@ -105,10 +105,10 @@ $('img.close').on('click', function() {
 
 var menuImageToggle = function(img){
   if (img.class!='menu-close'){
-    img.src="/images/menu-close.png";
+    img.src="http://i1148.photobucket.com/albums/o567/spontandom/menu-close_zpso4nwydva.png";
     img.class='menu-close';
   } else if(img.class == 'menu-close') {
-    img.src= "/images/menu-open.png";
+    img.src= "http://i1148.photobucket.com/albums/o567/spontandom/menu-open_zpsnyy96fh0.png";
     img.class='menu-open'
   }
   return false;
@@ -672,15 +672,15 @@ $('select.shuttle').change(function() {
 
 icons = {
   green: {
-    icon: 'images/green.png'
+    icon: 'http://i1148.photobucket.com/albums/o567/spontandom/green_zpsvjoi1xan.png'
     //https://www.iconfinder.com/icons/34211/green_icon#size=16
   },
   red: {
-    icon: 'images/red.png'
+    icon: 'http://i1148.photobucket.com/albums/o567/spontandom/red_zpsaigji2bk.png'
     //https://www.iconfinder.com/icons/34214/circle_green_icon#size=16
   },
   gray: {
-    icon: 'images/gray.png'
+    icon: 'http://i1148.photobucket.com/albums/o567/spontandom/gray_zpslzp91xyp.png'
     //https://www.iconfinder.com/icons/34212/circle_grey_icon#size=16
   }
 };
