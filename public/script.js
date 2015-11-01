@@ -117,7 +117,7 @@ var menuImageToggle = function(img){
 //////// START: LINE 1 SELECTORS //////////
 $('select.one').change(function() {
   var lineSelected = $('option:selected.one').text();
-    console.log('one selected:', lineSelected)
+    //console.log('one selected:', lineSelected)
     if(lineSelected === 'One All') {
       oneAll();
     } else if (lineSelected === 'One North') {
@@ -131,7 +131,7 @@ $('select.one').change(function() {
 //////// START: LINE 2 SELECTORS //////////
 $('select.two').change(function() {
   var lineSelected = $('option:selected.two').text();
-    console.log('two selected:', lineSelected)
+    //console.log('two selected:', lineSelected)
     if(lineSelected === 'Two All') {
       twoAll();
     } else if (lineSelected === 'Two North') {
@@ -144,7 +144,7 @@ $('select.two').change(function() {
 //////// START: LINE 3 SELECTORS //////////
 $('select.three').change(function() {
   var lineSelected = $('option:selected.three').text();
-    console.log('three selected:', lineSelected)
+    //console.log('three selected:', lineSelected)
     if(lineSelected === 'Three All') {
       threeAll();
     } else if (lineSelected === 'Three North') {
@@ -157,7 +157,7 @@ $('select.three').change(function() {
 //////// START: LINE 4 SELECTORS //////////
 $('select.four').change(function() {
   var lineSelected = $('option:selected.four').text();
-    console.log('four selected:', lineSelected)
+    //console.log('four selected:', lineSelected)
     if(lineSelected === 'Four All') {
       fourAll();
     } else if (lineSelected === 'Four North') {
@@ -170,7 +170,7 @@ $('select.four').change(function() {
 //////// START: LINE 5 SELECTORS //////////
 $('select.five').change(function() {
   var lineSelected = $('option:selected.five').text();
-    console.log('five selected:', lineSelected)
+    //console.log('five selected:', lineSelected)
     if(lineSelected === 'Five All') {
       fiveAll();
     } else if (lineSelected === 'Five North') {
@@ -183,7 +183,7 @@ $('select.five').change(function() {
 //////// START: LINE 6 SELECTORS //////////
 $('select.six').change(function() {
   var lineSelected = $('option:selected.six').text();
-    console.log('six selected:', lineSelected)
+    //console.log('six selected:', lineSelected)
     if(lineSelected === 'Six All') {
       sixAll();
     } else if (lineSelected === 'Six North') {
@@ -196,7 +196,7 @@ $('select.six').change(function() {
 //////// START: LINE Shuttle SELECTORS //////////
 $('select.shuttle').change(function() {
   var lineSelected = $('option:selected.shuttle').text();
-    console.log('shuttle selected:', lineSelected)
+    //console.log('shuttle selected:', lineSelected)
     if(lineSelected === 'Shuttle All') {
       shuttleAll();
     } else if (lineSelected === 'Shuttle North') {
@@ -238,13 +238,13 @@ $('select.shuttle').change(function() {
 
 ///// START: LINE 1 FXNS ///////
 
-    console.log('lineOne', lineOne, lineOne.length)
+    //console.log('lineOne', lineOne, lineOne.length)
 // remove duplicates from lineOne
     var lineOneFiltered = lineOne.reduce(function(a,b){
       if(a.indexOf(b) < 0) a.push(b);
         return a;
       },[]);
-    console.log('lineOneFiltered',lineOneFiltered, lineOneFiltered.length)
+    //console.log('lineOneFiltered',lineOneFiltered, lineOneFiltered.length)
 
     for(var i=0; i<lineOneFiltered.length; i++){
       stops1.forEach(function(e,k){
@@ -264,9 +264,9 @@ $('select.shuttle').change(function() {
    })
   }
 
-   console.log('oneArray', oneArray, oneArray.length)
-   console.log('oneNorthArray', oneNorthArray, oneNorthArray.length)
-   console.log('oneSouthArray', oneSouthArray, oneSouthArray.length)
+   //console.log('oneArray', oneArray, oneArray.length)
+   //console.log('oneNorthArray', oneNorthArray, oneNorthArray.length)
+   //console.log('oneSouthArray', oneSouthArray, oneSouthArray.length)
 
 
    oneAll = function() {
@@ -300,13 +300,13 @@ $('select.shuttle').change(function() {
 
 ///// START: LINE 2 FXNS ///////
 
-   console.log('lineTwo', lineTwo, lineTwo.length)
+   //console.log('lineTwo', lineTwo, lineTwo.length)
 // remove duplicates from lineTwo
    var lineTwoFiltered = lineTwo.reduce(function(a,b){
      if(a.indexOf(b) < 0) a.push(b);
        return a;
      },[]);
-   console.log('lineTwoFiltered',lineTwoFiltered, lineTwoFiltered.length)
+   //console.log('lineTwoFiltered',lineTwoFiltered, lineTwoFiltered.length)
 
    for(var i=0; i<lineTwoFiltered.length; i++){
      stops2.forEach(function(e,k){
@@ -326,9 +326,9 @@ $('select.shuttle').change(function() {
   })
  }
 
-  console.log('twoArray', twoArray, twoArray.length)
-  console.log('twoNorthArray', twoNorthArray, twoNorthArray.length)
-  console.log('twoSouthArray', twoSouthArray, twoSouthArray.length)
+  //console.log('twoArray', twoArray, twoArray.length)
+  //console.log('twoNorthArray', twoNorthArray, twoNorthArray.length)
+  //console.log('twoSouthArray', twoSouthArray, twoSouthArray.length)
 
 
   twoAll = function() {
@@ -360,13 +360,13 @@ $('select.shuttle').change(function() {
 
 ///// START: LINE 3 FXNS ///////
 
-  console.log('lineThree', lineThree, lineThree.length)
+  //console.log('lineThree', lineThree, lineThree.length)
   // remove duplicates from lineThree
   var lineThreeFiltered = lineThree.reduce(function(a,b){
     if(a.indexOf(b) < 0) a.push(b);
       return a;
     },[]);
-  console.log('lineThreeFiltered',lineThreeFiltered, lineThreeFiltered.length)
+  //console.log('lineThreeFiltered',lineThreeFiltered, lineThreeFiltered.length)
 
   for(var i=0; i<lineThreeFiltered.length; i++){
     stops3.forEach(function(e,k){
@@ -386,9 +386,9 @@ $('select.shuttle').change(function() {
   })
   }
 
-  console.log('threeArray', threeArray, threeArray.length)
-  console.log('threeNorthArray', threeNorthArray, threeNorthArray.length)
-  console.log('threeSouthArray', threeSouthArray, threeSouthArray.length)
+  //console.log('threeArray', threeArray, threeArray.length)
+  //console.log('threeNorthArray', threeNorthArray, threeNorthArray.length)
+  //console.log('threeSouthArray', threeSouthArray, threeSouthArray.length)
 
 
   threeAll = function() {
@@ -423,13 +423,13 @@ $('select.shuttle').change(function() {
 
 ///// START: LINE 4 FXNS ///////
 
-  console.log('lineFour', lineFour, lineFour.length)
+  //console.log('lineFour', lineFour, lineFour.length)
   // remove duplicates from lineFour
   var lineFourFiltered = lineFour.reduce(function(a,b){
     if(a.indexOf(b) < 0) a.push(b);
       return a;
     },[]);
-  console.log('lineFourFiltered',lineFourFiltered, lineFourFiltered.length)
+  //console.log('lineFourFiltered',lineFourFiltered, lineFourFiltered.length)
 
   for(var i=0; i<lineFourFiltered.length; i++){
     stops4.forEach(function(e,k){
@@ -449,9 +449,9 @@ $('select.shuttle').change(function() {
   })
   }
 
-  console.log('fourArray', fourArray, fourArray.length)
-  console.log('fourNorthArray', fourNorthArray, fourNorthArray.length)
-  console.log('fourSouthArray', fourSouthArray, fourSouthArray.length)
+  //console.log('fourArray', fourArray, fourArray.length)
+  //console.log('fourNorthArray', fourNorthArray, fourNorthArray.length)
+  //console.log('fourSouthArray', fourSouthArray, fourSouthArray.length)
 
 
   fourAll = function() {
@@ -486,13 +486,13 @@ $('select.shuttle').change(function() {
 
 ///// START: LINE 5 FXNS ///////
 
-  console.log('lineFive', lineFive, lineFive.length)
+  //console.log('lineFive', lineFive, lineFive.length)
   // remove duplicates from lineFive
   var lineFiveFiltered = lineFive.reduce(function(a,b){
     if(a.indexOf(b) < 0) a.push(b);
       return a;
     },[]);
-  console.log('lineFiveFiltered',lineFiveFiltered, lineFiveFiltered.length)
+  //console.log('lineFiveFiltered',lineFiveFiltered, lineFiveFiltered.length)
 
   for(var i=0; i<lineFiveFiltered.length; i++){
     stops5.forEach(function(e,k){
@@ -512,9 +512,9 @@ $('select.shuttle').change(function() {
   })
   }
 
-  console.log('fiveArray', fiveArray, fiveArray.length)
-  console.log('fiveNorthArray', fiveNorthArray, fiveNorthArray.length)
-  console.log('fiveSouthArray', fiveSouthArray, fiveSouthArray.length)
+  //console.log('fiveArray', fiveArray, fiveArray.length)
+  //console.log('fiveNorthArray', fiveNorthArray, fiveNorthArray.length)
+  //console.log('fiveSouthArray', fiveSouthArray, fiveSouthArray.length)
 
 
   fiveAll = function() {
@@ -548,13 +548,13 @@ $('select.shuttle').change(function() {
 
 // ///// START: LINE 6 FXNS ///////
 
-  console.log('lineSix', lineSix, lineSix.length)
+  //console.log('lineSix', lineSix, lineSix.length)
   // remove duplicates from lineSix
   var lineSixFiltered = lineSix.reduce(function(a,b){
     if(a.indexOf(b) < 0) a.push(b);
       return a;
     },[]);
-  console.log('lineSixFiltered',lineSixFiltered, lineSixFiltered.length)
+  //console.log('lineSixFiltered',lineSixFiltered, lineSixFiltered.length)
 
   for(var i=0; i<lineSixFiltered.length; i++){
     stops6.forEach(function(e,k){
@@ -574,9 +574,9 @@ $('select.shuttle').change(function() {
   })
   }
 
-  console.log('sixArray', sixArray, sixArray.length)
-  console.log('sixNorthArray', sixNorthArray, sixNorthArray.length)
-  console.log('sixSouthArray', sixSouthArray, sixSouthArray.length)
+  //console.log('sixArray', sixArray, sixArray.length)
+  //console.log('sixNorthArray', sixNorthArray, sixNorthArray.length)
+  //console.log('sixSouthArray', sixSouthArray, sixSouthArray.length)
 
 
   sixAll = function() {
@@ -609,13 +609,13 @@ $('select.shuttle').change(function() {
 
 // ///// START: LINE Shuttle FXNS ///////
 
-  console.log('lineShuttle', lineShuttle, lineShuttle.length)
+  //console.log('lineShuttle', lineShuttle, lineShuttle.length)
   // remove duplicates from lineShuttle
   var lineShuttleFiltered = lineShuttle.reduce(function(a,b){
     if(a.indexOf(b) < 0) a.push(b);
       return a;
     },[]);
-  console.log('lineShuttleFiltered',lineShuttleFiltered, lineShuttleFiltered.length)
+  //console.log('lineShuttleFiltered',lineShuttleFiltered, lineShuttleFiltered.length)
 
   for(var i=0; i<lineShuttleFiltered.length; i++){
     stopsShuttle.forEach(function(e,k){
@@ -635,9 +635,9 @@ $('select.shuttle').change(function() {
   })
   }
 
-  console.log('shuttleArray', shuttleArray, shuttleArray.length)
-  console.log('shuttleNorthArray', shuttleNorthArray, shuttleNorthArray.length)
-  console.log('shuttleSouthArray', shuttleSouthArray, shuttleSouthArray.length)
+  //console.log('shuttleArray', shuttleArray, shuttleArray.length)
+  //console.log('shuttleNorthArray', shuttleNorthArray, shuttleNorthArray.length)
+  //console.log('shuttleSouthArray', shuttleSouthArray, shuttleSouthArray.length)
 
 
   shuttleAll = function() {
@@ -723,7 +723,7 @@ icons = {
       } else if (trainShuttlePath) {
         trainShuttlePath.setMap(null)
       } else {
-        console.log("All polylines cleared.")
+        //console.log("All polylines cleared.")
       }
     }
 
