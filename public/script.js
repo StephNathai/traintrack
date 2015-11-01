@@ -884,7 +884,8 @@ socket.on('shapesShuttle', function(shapesShuttle) {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 40.75529, lng: -73.987495}, //this is set to NYC lat and long
         zoom: 13,
-        mapTypeControl: false
+        mapTypeControl: false,
+        streetViewControl: false
       });
 
     //this adds transit layer
