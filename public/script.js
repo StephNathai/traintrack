@@ -90,7 +90,7 @@ $('button.clear').on('click', function() {
 })
 
 $('button.transit').on('click', function() {
-  toggleLayer()();
+  toggleLayer();
 })
 
 
