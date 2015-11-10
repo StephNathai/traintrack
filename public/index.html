@@ -12,47 +12,47 @@
     <div class="nav">
       <button class="clear">Clear Map</button>
       <button class="transit">Transit</button>
-      <select class="one">
+      <select class="one" onfocus="this.selectedIndex = 0;">
         <option class="one" value="" disabled selected>One</option>
         <option class="one" value="oneAll">One All</option>
         <option class="one" value="oneNorth">One North</option>
         <option class="one" value="oneSouth">One South</option>
       </select>
-      <select class="two">
+      <select class="two" onfocus="this.selectedIndex = 0;">
         <option class="two" value="" disabled selected>Two</option>
         <option class="two" value="twoAll">Two All</option>
         <option class="two" value="twoNorth">Two North</option>
         <option class="two" value="twoSouth">Two South</option>
       </select>
-      <select class="three">
+      <select class="three" onfocus="this.selectedIndex = 0;">
         <option class="three" value="" disabled selected>Three</option>
         <option class="three" value="threeAll">Three All</option>
         <option class="three" value="threeNorth">Three North</option>
         <option class="three" value="threeSouth">Three South</option>
       </select>
-      <select class="four">
+      <select class="four" onfocus="this.selectedIndex = 0;">
         <option class="four" value="" disabled selected>Four</option>
         <option class="four" value="fourAll">Four All</option>
         <option class="four" value="fourNorth">Four North</option>
         <option class="four" value="fourSouth">Four South</option>
       </select>
-      <select class="five">
+      <select class="five" onfocus="this.selectedIndex = 0;">
         <option class="five" value="" disabled selected>Five</option>
         <option class="five" value="fiveAll">Five All</option>
         <option class="five" value="fiveNorth">Five North</option>
         <option class="five" value="fiveSouth">Five South</option>
       </select>
-      <select class="six">
+      <select class="six" onfocus="this.selectedIndex = 0;">
         <option class="six" value="" disabled selected>Six</option>
         <option class="six" value="sixAll">Six All</option>
         <option class="six" value="sixNorth">Six North</option>
         <option class="six" value="sixSouth">Six South</option>
       </select>
-      <select class="shuttle">
+      <select class="shuttle" onfocus="this.selectedIndex = 0;">
         <option class="shuttle" value="" disabled selected>Shuttle</option>
         <option class="shuttle" value="shuttleAll">Shuttle All</option>
-        <option class="shuttle" value="shuttleNorth">Shuttle North</option>
-        <option class="shuttle" value="shuttleSouth">Shuttle South</option>
+        <option class="shuttle" value="shuttleNorth">TS Bound</option>
+        <option class="shuttle" value="shuttleSouth">GC Bound</option>
       </select>
     </div>
 
@@ -68,17 +68,13 @@
       <img class="close" src="http://i1148.photobucket.com/albums/o567/spontandom/close_zps9q8geuw4.png" alt="close">
       <!-- https://www.iconfinder.com/icons/211650/circled_close_icon#size=32-->
       <h2> Welcome to trainTrack!</h2>
-      <p> trainTrack is an interactive subway map that shows you where the NYC 1-6 and shuttle lines currently are in their route sequence.</p>
+      <p class="reg-text"> trainTrack is an interactive subway map that shows you where the NYC 1-6 and shuttle lines currently are in their route sequence.</p>
       <br />
-      <p> Click on the menu in the top left, select a line, and watch the trains appear! Internet required.</p>
+      <p class="reg-text"> Click on the menu in the top left, select a line, and watch the trains appear! Internet required.</p>
+      <br />
+      <p class="small-text"> For any questions or comments, please email: contact@stephnathai.com</p>
     </div>
     <div id="map"></div>
-    <!-- <script src="/map.jsx" type="text/jsx"></script>
-    <script src="http://fb.me/react-0.12.2.js"></script>
-    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
-    <script type="text/jsx">
-      React.render(<MapApp />, document.getElementById('map'));
-    </script> -->
     <script src="https://maps.googleapis.com/maps/api/js?&callback=initMap" async defer></script>
   </body>
 </html>

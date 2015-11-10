@@ -88,6 +88,8 @@ $('img.menu-open').on('click', function() {
 
 $('button.clear').on('click', function() {
   clearPolylines();
+  $('select').val('')
+
 })
 
 $('button.transit').on('click', function() {
@@ -125,6 +127,8 @@ $('select.one').change(function() {
     } else if (lineSelected === 'One South') {
       oneSouth();
     }
+    $('select.two, select.three, select.four, select.five, select.six, select.shuttle').val('')
+    $('select.one').blur();
 });
 
 
@@ -139,6 +143,8 @@ $('select.two').change(function() {
     } else if (lineSelected === 'Two South') {
       twoSouth();
     }
+    $('select.one, select.three, select.four, select.five, select.six, select.shuttle').val('')
+    $('select.two').blur();
 });
 
 //////// START: LINE 3 SELECTORS //////////
@@ -152,6 +158,8 @@ $('select.three').change(function() {
     } else if (lineSelected === 'Three South') {
       threeSouth();
     }
+    $('select.one, select.two, select.four, select.five, select.six, select.shuttle').val('')
+    $('select.three').blur();
 });
 
 //////// START: LINE 4 SELECTORS //////////
@@ -165,6 +173,8 @@ $('select.four').change(function() {
     } else if (lineSelected === 'Four South') {
       fourSouth();
     }
+    $('select.one, select.two, select.three, select.five, select.six, select.shuttle').val('')
+    $('select.four').blur();
 });
 
 //////// START: LINE 5 SELECTORS //////////
@@ -178,6 +188,8 @@ $('select.five').change(function() {
     } else if (lineSelected === 'Five South') {
       fiveSouth();
     }
+    $('select.one, select.two, select.three, select.four, select.six, select.shuttle').val('')
+    $('select.five').blur();
 });
 
 //////// START: LINE 6 SELECTORS //////////
@@ -191,6 +203,8 @@ $('select.six').change(function() {
     } else if (lineSelected === 'Six South') {
       sixSouth();
     }
+    $('select.one, select.two, select.three, select.four, select.five, select.shuttle').val('')
+    $('select.six').blur();
 });
 
 //////// START: LINE Shuttle SELECTORS //////////
@@ -199,11 +213,13 @@ $('select.shuttle').change(function() {
     //console.log('shuttle selected:', lineSelected)
     if(lineSelected === 'Shuttle All') {
       shuttleAll();
-    } else if (lineSelected === 'Shuttle North') {
+    } else if (lineSelected === 'TS Bound') {
       shuttleNorth();
-    } else if (lineSelected === 'Shuttle South') {
+    } else if (lineSelected === 'GC Bound') {
       shuttleSouth();
     }
+    $('select.one, select.two, select.three, select.four, select.five, select.six').val('')
+    $('select.shuttle').blur();
 });
 
   //grabs parsed MTA data and prints it
