@@ -688,15 +688,15 @@ $('select.shuttle').change(function() {
 
 icons = {
   green: {
-    icon: 'http://i1148.photobucket.com/albums/o567/spontandom/green_zpsvjoi1xan.png'
+    icon: 'https://i1148.photobucket.com/albums/o567/spontandom/green_zpsvjoi1xan.png'
     //https://www.iconfinder.com/icons/34211/green_icon#size=16
   },
   red: {
-    icon: 'http://i1148.photobucket.com/albums/o567/spontandom/red_zpsaigji2bk.png'
+    icon: 'https://i1148.photobucket.com/albums/o567/spontandom/red_zpsaigji2bk.png'
     //https://www.iconfinder.com/icons/34214/circle_green_icon#size=16
   },
   gray: {
-    icon: 'http://i1148.photobucket.com/albums/o567/spontandom/gray_zpslzp91xyp.png'
+    icon: 'https://i1148.photobucket.com/albums/o567/spontandom/gray_zpslzp91xyp.png'
     //https://www.iconfinder.com/icons/34212/circle_grey_icon#size=16
   }
 };
