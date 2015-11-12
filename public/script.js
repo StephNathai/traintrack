@@ -107,10 +107,10 @@ $('img.close').on('click', function() {
 
 var menuImageToggle = function(img){
   if (img.class!='menu-close'){
-    img.src="http://i1148.photobucket.com/albums/o567/spontandom/menu-close_zpso4nwydva.png";
+    img.src="https://i1148.photobucket.com/albums/o567/spontandom/menu-close_zpso4nwydva.png";
     img.class='menu-close';
   } else if(img.class == 'menu-close') {
-    img.src= "http://i1148.photobucket.com/albums/o567/spontandom/menu-open_zpsnyy96fh0.png";
+    img.src= "https://i1148.photobucket.com/albums/o567/spontandom/menu-open_zpsnyy96fh0.png";
     img.class='menu-open'
   }
   return false;
